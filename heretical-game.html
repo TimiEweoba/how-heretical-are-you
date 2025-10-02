@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Heretical Are You? - A Trial of Doctrine</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Uncial+Antiqua&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, #8B7355 0%, #A0826D 50%, #8B7355 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(139, 69, 19, 0.1) 35px, rgba(139, 69, 19, 0.1) 70px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(160, 82, 45, 0.05) 35px, rgba(160, 82, 45, 0.05) 70px);
+            pointer-events: none;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 600px;
+            z-index: 1;
+        }
+        
+        .parchment {
+            background: linear-gradient(to bottom, #F4E8D0, #E8D7B3);
+            border: 3px solid #8B4513;
+            border-radius: 5px;
+            padding: 40px;
+            box-shadow: 
+                0 0 20px rgba(0,0,0,0.5),
+                inset 0 0 60px rgba(139, 69, 19, 0.1),
+                inset 0 0 120px rgba(139, 69, 19, 0.05);
+            position: relative;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .parchment::before,
+        .parchment::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #8B4513;
+        }
+        
+        .parchment::before {
+            top: 10px;
+            left: 10px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .parchment::after {
+            bottom: 10px;
+            right: 10px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-family: 'Uncial Antiqua', cursive;
+            font-size: 2.5em;
+            text-align: center;
+            color: #5D4037;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            text-align: center;
+            color: #6D4C41;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        
+        .start-text {
+            text-align: center;
+            color: #5D4037;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .wax-seal {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, #DC143C, #8B0000);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 
+                inset -3px -3px 10px rgba(0,0,0,0.5),
+                0 4px 8px rgba(0,0,0,0.3);
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: #FFD700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .button {
+            background: linear-gradient(to bottom, #8B4513, #654321);
+            color: #F4E8D0;
+            border: 2px solid #5D4037;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 3px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .button:hover {
+            background: linear-gradient(to bottom, #A0522D, #8B4513);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+        
+        .button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .button-group .button {
+            margin: 0;
+        }
+        
+        .difficulty-easy {
+            background: linear-gradient(to bottom, #2E7D32, #1B5E20);
+            border-color: #1B5E20;
+        }
+        
+        .difficulty-medium {
+            background: linear-gradient(to bottom, #F57C00, #E65100);
+            border-color: #E65100;
+        }
+        
+        .difficulty-hard {
+            background: linear-gradient(to bottom, #DC143C, #8B0000);
+            border-color: #8B0000;
+        }
+        
+        .difficulty-easy:hover {
+            background: linear-gradient(to bottom, #388E3C, #2E7D32);
+        }
+        
+        .difficulty-medium:hover {
+            background: linear-gradient(to bottom, #FF8F00, #F57C00);
+        }
+        
+        .difficulty-hard:hover {
+            background: linear-gradient(to bottom, #FF1744, #DC143C);
+        }
+        
+        .question-container {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .question-number {
+            text-align: center;
+            color: #8B4513;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .question-text {
+            font-size: 1.2em;
+            color: #5D4037;
+            text-align: center;
+            margin-bottom: 40px;
+            line-height: 1.5;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-left: 3px solid #8B4513;
+            border-right: 3px solid #8B4513;
+        }
+        
+        .timer {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            color: #8B4513;
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(139, 69, 19, 0.1);
+            border: 2px solid #8B4513;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .reaction {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            margin-top: 20px;
+            padding: 15px 20px;
+            font-style: italic;
+            color: #5D4037;
+            background: rgba(245, 222, 179, 0.8);
+            border: 2px solid #8B4513;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1em;
+            font-family: 'Cinzel', serif;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .reaction.show {
+            opacity: 1;
+            animation: fadeInScale 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeInScale {
+            from { 
+                opacity: 0; 
+                transform: scale(0.9); 
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1); 
+            }
+        }
+        
+        .answer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        
+        .answer-button {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #8B4513, #654321);
+            border: 3px solid #5D4037;
+            color: #F4E8D0;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 
+                inset -2px -2px 8px rgba(0,0,0,0.4),
+                0 4px 8px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .answer-button::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 40%, transparent 40%, rgba(255,255,255,0.1) 50%);
+        }
+        
+        .answer-button:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 
+                inset -3px -3px 10px rgba(0,0,0,0.5),
+                0 6px 12px rgba(0,0,0,0.4);
+        }
+        
+        .answer-button.agree {
+            background: radial-gradient(circle at 30% 30%, #2E7D32, #1B5E20);
+        }
+        
+        .answer-button.disagree {
+            background: radial-gradient(circle at 30% 30%, #DC143C, #8B0000);
+        }
+        
+        .verdict-title {
+            font-family: 'Uncial Antiqua', cursive;
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #5D4037;
+        }
+        
+        .verdict-level {
+            font-size: 1.8em;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+        
+        .verdict-level.innocent { color: #2E7D32; }
+        .verdict-level.suspicious { color: #F57C00; }
+        .verdict-level.heretic { color: #DC143C; }
+        
+        .council-verdict {
+            background: rgba(255, 255, 255, 0.4);
+            border: 2px solid #8B4513;
+            border-radius: 3px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .council-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #5D4037;
+            margin-bottom: 10px;
+        }
+        
+        .council-text {
+            font-style: italic;
+            color: #6D4C41;
+            line-height: 1.5;
+        }
+        
+        .score-display {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #5D4037;
+        }
+        
+        .decorative-border {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #8B4513 20%, #8B4513 80%, transparent);
+            margin: 20px 0;
+        }
+        
+        .council-sidebar {
+            position: fixed;
+            right: -350px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 320px;
+            background: linear-gradient(135deg, #3E2723 0%, #5D4037 100%);
+            border: 3px solid #8B4513;
+            border-radius: 10px 0 0 10px;
+            padding: 20px;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+            transition: right 0.5s ease-in-out;
+            z-index: 1000;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .council-sidebar.visible {
+            right: 0;
+        }
+        
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #8B4513;
+        }
+        
+        .sidebar-header h3 {
+            font-family: 'Cinzel', serif;
+            color: #F4E8D0;
+            font-size: 1.3em;
+            margin: 5px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .sidebar-icon {
+            font-size: 1.5em;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .council-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .council-item {
+            background: rgba(245, 222, 179, 0.15);
+            border: 2px solid #A0522D;
+            border-radius: 5px;
+            padding: 12px;
+            color: #F4E8D0;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9em;
+            animation: slideInCouncil 0.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .council-item::before {
+            content: '⚠️';
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+        }
+        
+        .council-item-name {
+            font-weight: bold;
+            color: #FFD700;
+            margin-left: 20px;
+            display: block;
+        }
+        
+        .council-item-count {
+            font-size: 0.8em;
+            color: #FF6B6B;
+            margin-left: 20px;
+            margin-top: 5px;
+            display: block;
+        }
+        
+        @keyframes slideInCouncil {
+            from { 
+                opacity: 0; 
+                transform: translateX(50px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0);
+            }
+        }
+        
+        /* Scrollbar styling for sidebar */
+        .council-sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .council-sidebar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        
+        .council-sidebar::-webkit-scrollbar-thumb {
+            background: #8B4513;
+            border-radius: 10px;
+        }
+        
+        .council-sidebar::-webkit-scrollbar-thumb:hover {
+            background: #A0522D;
+        }
+        
+        /* Verdict Screen Styles */
+        .verdict-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: background 1s ease;
+        }
+        
+        .verdict-faithful {
+            background: radial-gradient(circle, #FFF9E6 0%, #F5DEB3 50%, #DEB887 100%);
+            animation: goldenGlow 3s ease-in-out infinite alternate;
+        }
+        
+        .verdict-borderline {
+            background: radial-gradient(circle, #F4E8D0 0%, #D2B48C 50%, #8B7355 100%);
+            animation: flickerCandle 2s ease-in-out infinite;
+        }
+        
+        .verdict-doomed {
+            background: radial-gradient(circle, #8B0000 0%, #DC143C 40%, #FF6347 100%);
+            animation: burningFlames 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes goldenGlow {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.15); }
+        }
+        
+        @keyframes flickerCandle {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(0.9); }
+        }
+        
+        @keyframes burningFlames {
+            0% { filter: brightness(1) hue-rotate(0deg); }
+            100% { filter: brightness(1.2) hue-rotate(10deg); }
+        }
+        
+        .parchment-scroll {
+            background: rgba(245, 222, 179, 0.95);
+            border: 4px solid #8B4513;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 700px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            animation: scrollUnfurl 1s ease-out;
+        }
+        
+        @keyframes scrollUnfurl {
+            0% {
+                transform: scaleY(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scaleY(0.5);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scaleY(1);
+                opacity: 1;
+            }
+        }
+        
+        .scroll-reveal {
+            animation: fadeInContent 1.5s ease-out 0.5s both;
+        }
+        
+        @keyframes fadeInContent {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .verdict-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .verdict-icon {
+            font-size: 4em;
+            margin-bottom: 10px;
+            animation: iconBounce 1s ease-out 1s;
+        }
+        
+        @keyframes iconBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .verdict-title-main {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #5D4037;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: titleReveal 1s ease-out 1.2s both;
+        }
+        
+        @keyframes titleReveal {
+            0% {
+                opacity: 0;
+                letter-spacing: -10px;
+            }
+            100% {
+                opacity: 1;
+                letter-spacing: normal;
+            }
+        }
+        
+        .verdict-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            color: #5D4037;
+            text-align: center;
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+        
+        .flavor-quip {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1em;
+            color: #8B4513;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(139, 69, 19, 0.1);
+            border-left: 3px solid #8B4513;
+            border-right: 3px solid #8B4513;
+            font-style: italic;
+        }
+        
+        .verdict-badge {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(139, 69, 19, 0.3);
+            border-radius: 10px;
+            border: 2px solid #8B4513;
+        }
+        
+        .score-summary {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1em;
+            color: #5D4037;
+            margin: 25px 0;
+            line-height: 1.6;
+        }
+        
+        .council-verdict {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(139, 69, 19, 0.15);
+            border: 2px solid #8B4513;
+            border-radius: 8px;
+        }
+        
+        .council-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #8B4513;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .council-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1em;
+            color: #5D4037;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 2em; }
+            .question-text { font-size: 1.1em; }
+            .answer-button { width: 100px; height: 100px; font-size: 0.9em; }
+            .parchment { padding: 30px 20px; }
+            
+            .council-sidebar {
+                width: 250px;
+                right: -270px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="parchment" id="gameContainer">
+            <!-- Content will be dynamically inserted here -->
+        </div>
+        
+        <!-- Offended Councils Sidebar -->
+        <div id="councilSidebar" class="council-sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-icon">⚔️</span>
+                <h3>Councils Offended</h3>
+            </div>
+            <div id="councilList" class="council-list">
+                <!-- Councils will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let questionsData = null;
+        let currentQuestions = [];
+        let currentQuestion = 0;
+        let globalScore = 0;
+        let councilScores = {};
+        let condemnedCouncils = [];
+        let answers = [];
+        let currentDifficulty = 'easy';
+        let questionTimer = null;
+        let orthodoxPoints = 0;
+        let sidebarVisible = false;
+
+        // Council verdict mapping
+        const councilVerdicts = {
+            "Nicaea": "Council of Nicaea (325 AD) has entered the chat… and you're not invited. They found you suspicious of Arian sympathies.",
+            "Chalcedon": "Council of Chalcedon (451 AD) declares you dangerously confused about Christ's two natures. Consider yourself an anathema.",
+            "Trent": "Council of Trent (1545–63) slams the gavel. Your views sound a little too Protestant for their taste. Condemned!",
+            "Worms": "The Diet of Worms (1521) demands a recantation. You refused. Congratulations, you're officially an outlaw.",
+            "Carthage": "The Council of Carthage rolls its eyes. You're toeing Pelagius' line, and Augustine is not amused.",
+            "Nicaea II": "Second Council of Nicaea (787) shakes its head. You clearly don't respect icons. The paintbrush of orthodoxy condemns you.",
+            "Scholastic Tradition": "Thomas Aquinas sighs from beyond the grave. The 'Dumb Ox' thinks you need more study.",
+            "Pentecostal Practice": "The Pentecostal elders are side-eyeing you. You might want to check your stance on tongues and prophecy.",
+            "Contemporary Orthodoxy": "Modern mainstream Christianity deems your views too edgy. The council of Twitter theologians condemns you.",
+            "Eastern Orthodoxy": "The Eastern Church reminds you: Rome is not the boss here. Your papal sympathies are heretical."
+        };
+
+        // Council chronological order for tie-breaking
+        const councilOrder = ["Nicaea", "Carthage", "Chalcedon", "Nicaea II", "Worms", "Trent", "Scholastic Tradition", "Eastern Orthodoxy", "Pentecostal Practice", "Contemporary Orthodoxy"];
+
+        // Utility function to shuffle and select random questions
+        function getRandomQuestions(questions, count) {
+            const shuffled = [...questions].sort(() => Math.random() - 0.5);
+            return shuffled.slice(0, count);
+        }
+
+        // Load questions from JSON
+        async function loadQuestions() {
+            try {
+                const response = await fetch('./public/questions.json');
+                questionsData = await response.json();
+                console.log('Questions loaded successfully');
+            } catch (error) {
+                console.error('Error loading questions:', error);
+                // Fallback to hardcoded questions if JSON fails to load
+                questionsData = {
+                    easy: [
+                        {
+                            id: 1,
+                            text: "Did Jesus ever directly call Himself 'God' in the Gospels?",
+                            options: ["Yes", "No"],
+                            answer: "No",
+                            council: "Nicaea",
+                            heresyPoints: 1
+                        },
+                        {
+                            id: 2,
+                            text: "Does the New Testament ever call the Holy Spirit 'God'?",
+                            options: ["Yes", "No"],
+                            answer: "Yes",
+                            council: "Nicaea",
+                            heresyPoints: 1
+                        },
+                        {
+                            id: 3,
+                            text: "What did the Council of Nicaea condemn Arius for teaching?",
+                            options: ["Son was created", "Son is co-eternal"],
+                            answer: "Son was created",
+                            council: "Nicaea",
+                            heresyPoints: 1
+                        },
+                        {
+                            id: 4,
+                            text: "The Council of Chalcedon defined Christ as...",
+                            options: ["1 person, 2 natures", "2 persons, 1 nature"],
+                            answer: "1 person, 2 natures",
+                            council: "Chalcedon",
+                            heresyPoints: 1
+                        },
+                        {
+                            id: 5,
+                            text: "Why was Luther condemned at Worms?",
+                            options: ["Denied Trinity", "Refused to recant writings", "Denied sacraments"],
+                            answer: "Refused to recant writings",
+                            council: "Worms",
+                            heresyPoints: 1
+                        }
+                    ],
+                    medium: [
+                        {
+                            text: "Icons and holy images deserve veneration and respect.",
+                            orthodox: true,
+                            council: "Nicaea II",
+                            heresyPoints: 1
+                        },
+                        {
+                            text: "The bread and wine merely symbolize Christ's body and blood.",
+                            orthodox: false,
+                            council: "Trent",
+                            heresyPoints: 1
+                        }
+                    ],
+                    hard: [
+                        {
+                            text: "Grace is irresistible and determines salvation entirely.",
+                            orthodox: false,
+                            council: "Trent",
+                            heresyPoints: 1
+                        }
+                    ],
+                    councils: {
+                        "Nicaea": {
+                            name: "Council of Nicaea",
+                            condemnation: "Thy denial marks thee as a heretic! Anathema!"
+                        },
+                        "Chalcedon": {
+                            name: "Council of Chalcedon",
+                            condemnation: "Thy christological confusion is condemned!"
+                        },
+                        "Worms": {
+                            name: "Diet of Worms",
+                            condemnation: "Thou art declared an outlaw!"
+                        },
+                        "Trent": {
+                            name: "Council of Trent",
+                            condemnation: "Protestant errors condemned!"
+                        },
+                        "Nicaea II": {
+                            name: "Second Council of Nicaea",
+                            condemnation: "Iconoclast condemned!"
+                        }
+                    }
+                };
+            }
+        }
+
+        function showStartScreen() {
+            const container = document.getElementById('gameContainer');
+            container.innerHTML = `
+                <h1>How Heretical Are You?</h1>
+                <div class="subtitle">A Trial of Doctrine</div>
+                <div class="decorative-border"></div>
+                <div class="start-text">
+                    By decree of the Holy Council, thou art summoned to answer questions of doctrine most grave. 
+                    Choose thy trial difficulty, then thy words with care, lest ye be found wanting in orthodoxy.
+                </div>
+                <div class="wax-seal">✝</div>
+                <div class="start-text" style="margin-top: 20px; font-weight: 600;">
+                    Select Thy Trial Difficulty:
+                </div>
+                <div class="button-group">
+                    <button class="button difficulty-easy" onclick="startGame('easy')">
+                        Easy Trial<br>
+                        <small style="font-size: 0.8em; font-weight: normal;">(Basic Doctrines)</small>
+                    </button>
+                    <button class="button difficulty-medium" onclick="startGame('medium')">
+                        Moderate Trial<br>
+                        <small style="font-size: 0.8em; font-weight: normal;">(Theological Nuances)</small>
+                    </button>
+                    <button class="button difficulty-hard" onclick="startGame('hard')">
+                        Severe Trial<br>
+                        <small style="font-size: 0.8em; font-weight: normal;">(Esoteric Theology)</small>
+                    </button>
+                </div>
+            `;
+        }
+
+        function startGame(difficulty) {
+            currentDifficulty = difficulty;
+            const allQuestions = questionsData[difficulty] || questionsData.easy;
+            console.log(`Starting ${difficulty} mode with ${allQuestions.length} total questions`);
+            // Randomly select 10 questions from the pool
+            currentQuestions = getRandomQuestions(allQuestions, 10);
+            console.log(`Selected ${currentQuestions.length} questions for gameplay`);
+            currentQuestion = 0;
+            globalScore = 0;
+            councilScores = {};
+            condemnedCouncils = [];
+            answers = [];
+            clearCouncilSidebar(); // Clear sidebar at start of new game
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if (currentQuestion >= currentQuestions.length) {
+                showVerdict();
+                return;
+            }
+
+            const question = currentQuestions[currentQuestion];
+            const container = document.getElementById('gameContainer');
+            
+            const difficultyLabel = currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1);
+            
+            // Handle different question formats
+            let answersHtml = '';
+            
+            if (question.options) {
+                // Multiple choice format (easy mode)
+                answersHtml = `
+                    <div class="options-container" style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto;">
+                        ${question.options.map((option, index) => `
+                            <button class="option-button" onclick="answerMultipleChoice('${option.replace(/'/g, "\\'")}')"
+                                style="
+                                    background: linear-gradient(to bottom, #8B4513, #654321);
+                                    color: #F4E8D0;
+                                    border: 2px solid #5D4037;
+                                    padding: 15px 25px;
+                                    font-size: 1em;
+                                    font-family: 'Cinzel', serif;
+                                    font-weight: 600;
+                                    cursor: pointer;
+                                    border-radius: 3px;
+                                    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+                                    transition: all 0.3s ease;
+                                    text-align: center;
+                                "
+                                onmouseover="this.style.background='linear-gradient(to bottom, #A0522D, #8B4513)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.4)';"
+                                onmouseout="this.style.background='linear-gradient(to bottom, #8B4513, #654321)'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.3)';"
+                            >
+                                ${option}
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+            } else {
+                // Agree/Disagree format (medium/hard mode)
+                answersHtml = `
+                    <div class="answer-buttons">
+                        <button class="answer-button agree" onclick="answer(true)">
+                            Agree
+                        </button>
+                        <button class="answer-button disagree" onclick="answer(false)">
+                            Disagree
+                        </button>
+                    </div>
+                `;
+            }
+            
+            // Timer HTML (if question has timeLimit)
+            const timerHtml = question.timeLimit ? `
+                <div id="timer" class="timer">⏳ ${question.timeLimit}s</div>
+            ` : '';
+            
+            container.innerHTML = `
+                <div class="question-container">
+                    <div class="question-number">${difficultyLabel} Trial - Question ${currentQuestion + 1} of ${currentQuestions.length}</div>
+                    <div class="decorative-border"></div>
+                    ${timerHtml}
+                    <div class="question-text">${question.text}</div>
+                    ${answersHtml}
+                    <div id="reaction" class="reaction"></div>
+                </div>
+            `;
+            
+            // Start timer if question has timeLimit
+            if (question.timeLimit) {
+                startQuestionTimer(question.timeLimit);
+            }
+        }
+
+        // Timer functions
+        function startQuestionTimer(seconds) {
+            clearTimeout(questionTimer);
+            let timeLeft = seconds;
+            const timerElement = document.getElementById('timer');
+            
+            function updateTimer() {
+                if (timeLeft <= 0) {
+                    handleTimeout();
+                    return;
+                }
+                
+                timerElement.innerText = `⏳ ${timeLeft}s`;
+                if (timeLeft <= 5) {
+                    timerElement.style.color = '#8B0000';
+                    timerElement.style.fontWeight = 'bold';
+                }
+                
+                timeLeft--;
+                questionTimer = setTimeout(updateTimer, 1000);
+            }
+            
+            updateTimer();
+        }
+        
+        function clearQuestionTimer() {
+            if (questionTimer) {
+                clearTimeout(questionTimer);
+                questionTimer = null;
+            }
+        }
+        
+        function handleTimeout() {
+            clearQuestionTimer();
+            const question = currentQuestions[currentQuestion];
+            
+            // Use timeout verdict mapping if available
+            let reactionMessage = "The bishops murmur: 'Why so silent? Suspicion grows…'";
+            let heresyPointsToAdd = 1;
+            
+            if (question.verdictMapping && question.verdictMapping.timeout) {
+                const timeoutVerdict = question.verdictMapping.timeout;
+                reactionMessage = timeoutVerdict.reactionMessage;
+                heresyPointsToAdd = timeoutVerdict.heresyPoints || 1;
+                orthodoxPoints += timeoutVerdict.orthodoxPoints || 0;
+            }
+            
+            // Add heresy points
+            globalScore += heresyPointsToAdd;
+            if (question.council) {
+                const wasNewCouncil = !condemnedCouncils.includes(question.council);
+                councilScores[question.council] = (councilScores[question.council] || 0) + heresyPointsToAdd;
+                if (wasNewCouncil) {
+                    condemnedCouncils.push(question.council);
+                }
+                // Add or update council in sidebar
+                addCouncilToSidebar(question.council, councilScores[question.council]);
+            }
+            
+            // Show reaction
+            showReaction(reactionMessage);
+            
+            // Record answer
+            answers.push({
+                question: question.text,
+                answered: 'TIMEOUT',
+                correct: false,
+                correctAnswer: question.answer,
+                council: question.council
+            });
+            
+            // Move to next question after showing reaction
+            setTimeout(() => {
+                currentQuestion++;
+                showQuestion();
+            }, 3000);
+        }
+        
+        function showReaction(message) {
+            const reactionBox = document.getElementById('reaction');
+            if (!reactionBox) return;
+            
+            reactionBox.innerText = message;
+            reactionBox.classList.add('show');
+            
+            setTimeout(() => {
+                reactionBox.classList.remove('show');
+            }, 2500);
+        }
+        
+        // Sidebar functions
+        function showCouncilSidebar() {
+            const sidebar = document.getElementById('councilSidebar');
+            if (!sidebarVisible) {
+                sidebar.classList.add('visible');
+                sidebarVisible = true;
+            }
+        }
+        
+        function hideCouncilSidebar() {
+            const sidebar = document.getElementById('councilSidebar');
+            sidebar.classList.remove('visible');
+            sidebarVisible = false;
+        }
+        
+        function addCouncilToSidebar(council, points) {
+            const councilList = document.getElementById('councilList');
+            
+            // Check if council already exists in sidebar
+            const existingItem = document.getElementById(`council-${council.replace(/\s+/g, '-')}`);
+            
+            if (existingItem) {
+                // Update existing council's offense count
+                const countElement = existingItem.querySelector('.council-item-count');
+                const currentPoints = councilScores[council] || 0;
+                countElement.textContent = `${currentPoints} offense${currentPoints !== 1 ? 's' : ''}`;
+            } else {
+                // Add new council to sidebar
+                const councilItem = document.createElement('div');
+                councilItem.className = 'council-item';
+                councilItem.id = `council-${council.replace(/\s+/g, '-')}`;
+                councilItem.innerHTML = `
+                    <span class="council-item-name">${council}</span>
+                    <span class="council-item-count">${points} offense${points !== 1 ? 's' : ''}</span>
+                `;
+                councilList.appendChild(councilItem);
+                
+                // Show sidebar if first council
+                showCouncilSidebar();
+            }
+        }
+        
+        function clearCouncilSidebar() {
+            const councilList = document.getElementById('councilList');
+            councilList.innerHTML = '';
+            hideCouncilSidebar();
+        }
+
+        // Handle multiple choice answers (easy mode)
+        function answerMultipleChoice(selectedAnswer) {
+            clearQuestionTimer();
+            const question = currentQuestions[currentQuestion];
+            const isCorrect = selectedAnswer === question.answer;
+            
+            // Determine verdict and reaction
+            let reactionMessage = '';
+            let heresyPointsToAdd = 0;
+            let orthodoxPointsToAdd = 0;
+            
+            if (question.verdictMapping) {
+                const verdict = isCorrect ? question.verdictMapping.correct : question.verdictMapping.incorrect;
+                reactionMessage = verdict.reactionMessage;
+                heresyPointsToAdd = verdict.heresyPoints || 0;
+                orthodoxPointsToAdd = verdict.orthodoxPoints || 0;
+            } else {
+                // Fallback to default behavior
+                if (!isCorrect) {
+                    heresyPointsToAdd = question.heresyPoints || 1;
+                    reactionMessage = "The council frowns at your error.";
+                } else {
+                    reactionMessage = "The council nods in approval.";
+                }
+            }
+            
+            // Update scores
+            globalScore += heresyPointsToAdd;
+            orthodoxPoints += orthodoxPointsToAdd;
+            
+            // Add to council score bucket
+            if (heresyPointsToAdd > 0 && question.council) {
+                const wasNewCouncil = !condemnedCouncils.includes(question.council);
+                councilScores[question.council] = (councilScores[question.council] || 0) + heresyPointsToAdd;
+                if (wasNewCouncil) {
+                    condemnedCouncils.push(question.council);
+                }
+                // Add or update council in sidebar
+                addCouncilToSidebar(question.council, councilScores[question.council]);
+            }
+            
+            // Show reaction
+            if (reactionMessage) {
+                showReaction(reactionMessage);
+            }
+            
+            // Record answer
+            answers.push({
+                question: question.text,
+                answered: selectedAnswer,
+                correct: isCorrect,
+                correctAnswer: question.answer,
+                council: !isCorrect ? question.council : null
+            });
+            
+            // Move to next question after showing reaction
+            setTimeout(() => {
+                currentQuestion++;
+                showQuestion();
+            }, reactionMessage ? 3000 : 300);
+        }
+
+        // Handle agree/disagree answers (medium/hard mode)
+        function answer(agrees) {
+            const question = currentQuestions[currentQuestion];
+            const isHeretical = (agrees && !question.orthodox) || (!agrees && question.orthodox);
+            
+            if (isHeretical) {
+                const points = question.heresyPoints || 1;
+                globalScore += points;
+                
+                if (question.council) {
+                    const wasNewCouncil = !condemnedCouncils.includes(question.council);
+                    councilScores[question.council] = (councilScores[question.council] || 0) + points;
+                    if (wasNewCouncil) {
+                        condemnedCouncils.push(question.council);
+                    }
+                    // Add or update council in sidebar
+                    addCouncilToSidebar(question.council, councilScores[question.council]);
+                }
+            }
+            
+            answers.push({
+                question: question.text,
+                answered: agrees ? 'Agree' : 'Disagree',
+                heretical: isHeretical,
+                council: isHeretical ? question.council : null
+            });
+            
+            currentQuestion++;
+            setTimeout(showQuestion, 300);
+        }
+
+        // Flavor quips for each verdict tier
+        const flavorQuips = {
+            faithful: [
+                "The saints nod approvingly.",
+                "Even Aquinas is impressed — and that guy's hard to impress.",
+                "You may now safely correct others on the internet.",
+                "Augustine would hire you as his teaching assistant.",
+                "The angels are taking notes from you."
+            ],
+            borderline: [
+                "Augustine would raise an eyebrow at you.",
+                "You're basically medieval clickbait.",
+                "History may or may not remember you kindly.",
+                "The councils are... concerned.",
+                "You're one theological slip away from trouble."
+            ],
+            doomed: [
+                "Congratulations, you've offended everyone from Nicaea to Reddit.",
+                "Even Arius is shaking his head.",
+                "Don't worry — history will turn you into a meme.",
+                "The pyre is being prepared as we speak.",
+                "You've achieved peak heresy. Impressive, in a terrible way."
+            ]
+        };
+        
+        function getRandomQuip(category) {
+            const quips = flavorQuips[category];
+            return quips[Math.floor(Math.random() * quips.length)];
+        }
+
+        function showVerdict() {
+            let verdictType, verdictClass, verdictTitle, verdictIcon, verdictText, badge, quipCategory;
+            
+            // Determine verdict based on global score
+            if (globalScore <= 3) {
+                verdictType = 'faithful';
+                verdictClass = 'verdict-faithful';
+                verdictTitle = '✨ Most Orthodox';
+                verdictIcon = '🏅';
+                badge = '🏅 Guardian of Orthodoxy';
+                verdictText = `Thy doctrine is pure as spring water.<br>
+                    You've offended neither bishop nor council,<br>
+                    and your halo remains untarnished.`;
+                quipCategory = 'faithful';
+            } else if (globalScore <= 6) {
+                verdictType = 'borderline';
+                verdictClass = 'verdict-borderline';
+                verdictTitle = '⚖️ Borderline Heretic';
+                verdictIcon = '⚔️';
+                badge = '⚔️ Suspiciously Orthodox';
+                verdictText = `You balance precariously upon the razor's edge of truth.<br>
+                    One step further, and the Inquisition shall come knocking.`;
+                quipCategory = 'borderline';
+            } else {
+                verdictType = 'doomed';
+                verdictClass = 'verdict-doomed';
+                verdictTitle = '🔥 Arch-Heretic';
+                verdictIcon = '🔥';
+                badge = '🔥 Condemned Eternal';
+                verdictText = `Your words drip with blasphemy.<br>
+                    The Councils rage, the Bishops scowl,<br>
+                    and the flames of the pyre are stoked in your honor.`;
+                quipCategory = 'doomed';
+            }
+            
+            const container = document.getElementById('gameContainer');
+            
+            // Find the council with the highest score
+            let maxCouncil = null;
+            let maxScore = 0;
+            
+            for (const [council, score] of Object.entries(councilScores)) {
+                if (score > maxScore) {
+                    maxScore = score;
+                    maxCouncil = council;
+                } else if (score === maxScore && maxCouncil) {
+                    // Tie-breaker: earliest council chronologically
+                    const currentIndex = councilOrder.indexOf(council);
+                    const maxIndex = councilOrder.indexOf(maxCouncil);
+                    if (currentIndex !== -1 && (maxIndex === -1 || currentIndex < maxIndex)) {
+                        maxCouncil = council;
+                    }
+                }
+            }
+            
+            // Build council verdict
+            let councilVerdictHtml = '';
+            if (maxCouncil && councilVerdicts[maxCouncil]) {
+                councilVerdictHtml = `
+                    <div class="council-verdict">
+                        <div class="council-name">Council Verdict:</div>
+                        <div class="council-text">${councilVerdicts[maxCouncil]}</div>
+                    </div>
+                `;
+            } else if (globalScore === 0) {
+                councilVerdictHtml = `
+                    <div class="council-verdict">
+                        <div class="council-name">The Holy Councils declare:</div>
+                        <div class="council-text">Thy orthodoxy is unimpeachable! The Church rejoices in thy faith!</div>
+                    </div>
+                `;
+            }
+            
+            // Build score breakdown
+            let scoreBreakdown = '';
+            if (Object.keys(councilScores).length > 0) {
+                scoreBreakdown = '<div style="margin-top: 20px; font-size: 0.9em; color: #5D4037;"><strong>Heresy Points by Council:</strong><br>';
+                for (const [council, score] of Object.entries(councilScores).sort((a, b) => b[1] - a[1])) {
+                    scoreBreakdown += `${council}: ${score}<br>`;
+                }
+                scoreBreakdown += '</div>';
+            }
+            
+            // Get random flavor quip
+            const flavorQuip = getRandomQuip(quipCategory);
+            
+            // First show the parchment scroll animation
+            container.innerHTML = `
+                <div class="verdict-container ${verdictClass}">
+                    <div class="parchment-scroll">
+                        <div class="scroll-reveal">
+                            <div class="verdict-header">
+                                <div class="verdict-icon">${verdictIcon}</div>
+                                <div class="verdict-title-main">${verdictTitle}</div>
+                            </div>
+                            
+                            <div class="decorative-border"></div>
+                            
+                            <div class="verdict-text">
+                                ${verdictText}
+                            </div>
+                            
+                            <div class="decorative-border"></div>
+                            
+                            <div class="flavor-quip">
+                                <em>"${flavorQuip}"</em>
+                            </div>
+                            
+                            <div class="verdict-badge">
+                                ${badge}
+                            </div>
+                            
+                            <div class="score-summary">
+                                <strong>Total Heresy Points:</strong> ${globalScore}<br>
+                                <strong>Trial Difficulty:</strong> ${currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1)}
+                                ${scoreBreakdown}
+                            </div>
+                            
+                            ${councilVerdictHtml}
+                            
+                            <div class="decorative-border"></div>
+                            
+                            <button class="button" onclick="showStartScreen()">Face Trial Again</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Hide sidebar during verdict
+            hideCouncilSidebar();
+        }
+
+        // Initialize game when page loads
+        window.addEventListener('DOMContentLoaded', async () => {
+            await loadQuestions();
+            showStartScreen();
+        });
+    </script>
+</body>
+</html>
