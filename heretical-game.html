@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
     <title>How Heretical Are You? - A Trial of Doctrine</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Uncial+Antiqua&display=swap');
@@ -82,6 +82,37 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Mobile-specific animations */
+        @media (max-width: 768px) {
+            .question-container {
+                animation: slideInMobile 0.4s ease-out;
+            }
+            
+            @keyframes slideInMobile {
+                from { opacity: 0; transform: translateX(30px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            
+            .parchment-scroll {
+                animation: scrollUnfurlMobile 0.8s ease-out;
+            }
+            
+            @keyframes scrollUnfurlMobile {
+                0% {
+                    transform: scaleY(0) scaleX(0.8);
+                    opacity: 0;
+                }
+                50% {
+                    transform: scaleY(0.7) scaleX(0.9);
+                    opacity: 0.7;
+                }
+                100% {
+                    transform: scaleY(1) scaleX(1);
+                    opacity: 1;
+                }
+            }
         }
         
         h1 {
@@ -302,11 +333,26 @@
             background: radial-gradient(circle at 40% 40%, transparent 40%, rgba(255,255,255,0.1) 50%);
         }
         
-        .answer-button:hover {
+        .answer-button:hover,
+        .answer-button:active {
             transform: scale(1.1) rotate(5deg);
             box-shadow: 
                 inset -3px -3px 10px rgba(0,0,0,0.5),
                 0 6px 12px rgba(0,0,0,0.4);
+        }
+        
+        /* Touch feedback for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .answer-button:active {
+                transform: scale(0.95);
+                transition: transform 0.1s ease;
+            }
+            
+            .button:active,
+            .option-button:active {
+                transform: scale(0.98);
+                transition: transform 0.1s ease;
+            }
         }
         
         .answer-button.agree {
@@ -673,16 +719,211 @@
             line-height: 1.6;
         }
         
-        @media (max-width: 600px) {
-            h1 { font-size: 2em; }
-            .question-text { font-size: 1.1em; }
-            .answer-button { width: 100px; height: 100px; font-size: 0.9em; }
-            .parchment { padding: 30px 20px; }
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                min-height: 100vh;
+            }
+            
+            .container {
+                width: 95%;
+                max-width: none;
+            }
+            
+            .parchment {
+                padding: 20px 15px;
+                margin: 10px 0;
+                box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 15px;
+                line-height: 1.2;
+            }
+            
+            .subtitle {
+                font-size: 1em;
+                margin-bottom: 20px;
+            }
+            
+            .start-text {
+                font-size: 0.95em;
+                line-height: 1.4;
+                margin-bottom: 20px;
+            }
+            
+            .wax-seal {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5em;
+                margin: 0 auto 20px;
+            }
+            
+            .question-text {
+                font-size: 1em;
+                padding: 15px;
+                margin-bottom: 25px;
+                line-height: 1.4;
+            }
+            
+            .question-number {
+                font-size: 0.8em;
+                margin-bottom: 8px;
+            }
+            
+            .timer {
+                font-size: 20px;
+                padding: 8px;
+                margin-bottom: 12px;
+            }
+            
+            .answer-buttons {
+                gap: 25px;
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .answer-button {
+                width: 90px;
+                height: 90px;
+                font-size: 0.85em;
+                margin: 5px;
+            }
+            
+            .button-group {
+                gap: 15px;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .button {
+                width: 100%;
+                max-width: 280px;
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+            
+            .options-container {
+                max-width: 100% !important;
+                gap: 10px !important;
+            }
+            
+            .option-button {
+                padding: 12px 20px !important;
+                font-size: 0.9em !important;
+                width: 100%;
+            }
+            
+            .reaction {
+                padding: 12px 15px;
+                font-size: 0.9em;
+                margin-top: 15px;
+            }
             
             .council-sidebar {
-                width: 250px;
-                right: -270px;
+                width: 280px;
+                right: -300px;
+                font-size: 0.85em;
+                max-height: 70vh;
+            }
+            
+            /* Verdict Screen Mobile Optimizations */
+            .verdict-container {
+                padding: 10px;
+                min-height: 100vh;
+            }
+            
+            .parchment-scroll {
+                padding: 20px 15px;
+                max-width: 100%;
+                margin: 0;
+            }
+            
+            .verdict-icon {
+                font-size: 2.5em;
+                margin-bottom: 8px;
+            }
+            
+            .verdict-title-main {
+                font-size: 1.8em;
+                line-height: 1.2;
+                margin-bottom: 15px;
+            }
+            
+            .verdict-text {
+                font-size: 1em;
+                line-height: 1.5;
+                margin: 15px 0;
+            }
+            
+            .flavor-quip {
                 font-size: 0.9em;
+                padding: 12px;
+                margin: 15px 0;
+            }
+            
+            .verdict-badge {
+                font-size: 1.2em;
+                padding: 12px;
+                margin: 15px 0;
+            }
+            
+            .score-summary {
+                font-size: 0.85em;
+                margin: 20px 0;
+                line-height: 1.4;
+            }
+            
+            .council-verdict {
+                margin: 20px 0;
+                padding: 15px;
+            }
+            
+            .council-name {
+                font-size: 1em;
+                margin-bottom: 8px;
+            }
+            
+            .council-text {
+                font-size: 0.9em;
+                line-height: 1.4;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .parchment {
+                padding: 15px 10px;
+            }
+            
+            h1 {
+                font-size: 1.6em;
+            }
+            
+            .answer-buttons {
+                gap: 20px;
+            }
+            
+            .answer-button {
+                width: 80px;
+                height: 80px;
+                font-size: 0.8em;
+            }
+            
+            .verdict-title-main {
+                font-size: 1.5em;
+            }
+            
+            .verdict-icon {
+                font-size: 2em;
+            }
+            
+            /* Progress bar mobile optimization */
+            .profile-progress {
+                height: 6px !important;
+                margin: 10px 0 !important;
             }
         }
     </style>
@@ -717,19 +958,73 @@
         let questionTimer = null;
         let orthodoxPoints = 0;
         let sidebarVisible = false;
+        
+        // Profile Quiz Variables
+        let profileQuizData = null;
+        let currentProfileQuestion = 0;
+        let profileAnswers = [];
+        let playerProfile = {
+            knowledgeScore: 0,
+            streamTag: 'none',
+            preferredDifficulty: 'easy'
+        };
 
-        // Council verdict mapping
+        // LocalStorage Profile Management
+        const PROFILE_STORAGE_KEY = 'hereticalGameProfile';
+
+        function savePlayerProfile() {
+            const profileData = {
+                profile: playerProfile,
+                answers: profileAnswers,
+                timestamp: Date.now()
+            };
+            localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profileData));
+            console.log('Player profile saved to localStorage');
+        }
+
+        function loadPlayerProfile() {
+            try {
+                const stored = localStorage.getItem(PROFILE_STORAGE_KEY);
+                if (stored) {
+                    const profileData = JSON.parse(stored);
+                    playerProfile = profileData.profile;
+                    profileAnswers = profileData.answers || [];
+                    console.log('Player profile loaded from localStorage:', playerProfile);
+                    return true;
+                }
+            } catch (error) {
+                console.error('Error loading profile from localStorage:', error);
+            }
+            return false;
+        }
+
+        function clearPlayerProfile() {
+            localStorage.removeItem(PROFILE_STORAGE_KEY);
+            playerProfile = {
+                knowledgeScore: 0,
+                streamTag: 'none',
+                preferredDifficulty: 'easy'
+            };
+            profileAnswers = [];
+            console.log('Player profile cleared');
+        }
+
+        function hasStoredProfile() {
+            return localStorage.getItem(PROFILE_STORAGE_KEY) !== null;
+        }
+
+        // Council verdict mapping (mobile-optimized)
         const councilVerdicts = {
-            "Nicaea": "Council of Nicaea (325 AD) has entered the chat… and you're not invited. They found you suspicious of Arian sympathies.",
-            "Chalcedon": "Council of Chalcedon (451 AD) declares you dangerously confused about Christ's two natures. Consider yourself an anathema.",
-            "Trent": "Council of Trent (1545–63) slams the gavel. Your views sound a little too Protestant for their taste. Condemned!",
-            "Worms": "The Diet of Worms (1521) demands a recantation. You refused. Congratulations, you're officially an outlaw.",
-            "Carthage": "The Council of Carthage rolls its eyes. You're toeing Pelagius' line, and Augustine is not amused.",
-            "Nicaea II": "Second Council of Nicaea (787) shakes its head. You clearly don't respect icons. The paintbrush of orthodoxy condemns you.",
-            "Scholastic Tradition": "Thomas Aquinas sighs from beyond the grave. The 'Dumb Ox' thinks you need more study.",
-            "Pentecostal Practice": "The Pentecostal elders are side-eyeing you. You might want to check your stance on tongues and prophecy.",
-            "Contemporary Orthodoxy": "Modern mainstream Christianity deems your views too edgy. The council of Twitter theologians condemns you.",
-            "Eastern Orthodoxy": "The Eastern Church reminds you: Rome is not the boss here. Your papal sympathies are heretical."
+            "Nicaea": "Nicaea (325 AD): Arian sympathies detected. Anathema!",
+            "Chalcedon": "Chalcedon (451 AD): Christological confusion condemned.",
+            "Trent": "Trent (1545–63): Too Protestant. Gavel slammed!",
+            "Worms": "Worms (1521): Recantation refused. You're an outlaw.",
+            "Carthage": "Carthage: Pelagian tendencies. Augustine disapproves.",
+            "Nicaea II": "Nicaea II (787): Iconoclast detected. Condemned!",
+            "Scholastic Tradition": "Aquinas sighs. More study needed.",
+            "Pentecostal Practice": "Pentecostals side-eye your stance.",
+            "Contemporary Orthodoxy": "Modern Christianity finds you too edgy.",
+            "Eastern Orthodoxy": "Eastern Church: Rome isn't boss here."
         };
 
         // Council chronological order for tie-breaking
@@ -741,12 +1036,57 @@
             return shuffled.slice(0, count);
         }
 
+        // Filter questions based on player's theological stream
+        function filterQuestionsByStream(questions, streamTag) {
+            // Define councils/topics relevant to each stream
+            const streamRelevance = {
+                'catholic': ['Trent', 'Vatican I', 'Lateran IV', 'Florence', 'General Tradition'],
+                'protestant': ['Worms', 'Trent', 'General Scripture', 'Reformation'],
+                'orthodox': ['Nicaea', 'Chalcedon', 'Constantinople I', 'Constantinople II', 'Constantinople III', 'Nicaea II', 'Eastern Orthodoxy'],
+                'charismatic': ['Pentecostal Practice', 'Contemporary Orthodoxy', 'General Scripture'],
+                'none': [] // No filtering for curious seekers
+            };
+            
+            const relevantCouncils = streamRelevance[streamTag] || [];
+            
+            if (relevantCouncils.length === 0) {
+                return questions; // No filtering
+            }
+            
+            // Prioritize questions from relevant councils, but include others too
+            const relevantQuestions = questions.filter(q => 
+                relevantCouncils.includes(q.council)
+            );
+            
+            const otherQuestions = questions.filter(q => 
+                !relevantCouncils.includes(q.council)
+            );
+            
+            // Mix: 70% relevant, 30% other questions
+            const targetRelevant = Math.floor(questions.length * 0.7);
+            const targetOther = questions.length - targetRelevant;
+            
+            const selectedRelevant = getRandomQuestions(relevantQuestions, Math.min(targetRelevant, relevantQuestions.length));
+            const selectedOther = getRandomQuestions(otherQuestions, Math.min(targetOther, otherQuestions.length));
+            
+            return [...selectedRelevant, ...selectedOther];
+        }
+
         // Load questions from JSON
         async function loadQuestions() {
             try {
                 const response = await fetch('./public/questions.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 questionsData = await response.json();
-                console.log('Questions loaded successfully');
+                profileQuizData = questionsData.profileQuiz;
+                console.log('Questions loaded successfully:', {
+                    easy: questionsData.easy?.length || 0,
+                    medium: questionsData.medium?.length || 0,
+                    hard: questionsData.hard?.length || 0,
+                    profileQuiz: profileQuizData?.length || 0
+                });
             } catch (error) {
                 console.error('Error loading questions:', error);
                 // Fallback to hardcoded questions if JSON fails to load
@@ -758,7 +1098,8 @@
                             options: ["Yes", "No"],
                             answer: "No",
                             council: "Nicaea",
-                            heresyPoints: 1
+                            heresyPoints: 1,
+                            timeLimit: 30
                         },
                         {
                             id: 2,
@@ -766,7 +1107,8 @@
                             options: ["Yes", "No"],
                             answer: "Yes",
                             council: "Nicaea",
-                            heresyPoints: 1
+                            heresyPoints: 1,
+                            timeLimit: 30
                         },
                         {
                             id: 3,
@@ -774,7 +1116,8 @@
                             options: ["Son was created", "Son is co-eternal"],
                             answer: "Son was created",
                             council: "Nicaea",
-                            heresyPoints: 1
+                            heresyPoints: 1,
+                            timeLimit: 30
                         },
                         {
                             id: 4,
@@ -782,7 +1125,8 @@
                             options: ["1 person, 2 natures", "2 persons, 1 nature"],
                             answer: "1 person, 2 natures",
                             council: "Chalcedon",
-                            heresyPoints: 1
+                            heresyPoints: 1,
+                            timeLimit: 30
                         },
                         {
                             id: 5,
@@ -790,29 +1134,244 @@
                             options: ["Denied Trinity", "Refused to recant writings", "Denied sacraments"],
                             answer: "Refused to recant writings",
                             council: "Worms",
-                            heresyPoints: 1
-                        }
-                    ],
-                    medium: [
+                            heresyPoints: 1,
+                            timeLimit: 30
+                        },
                         {
                             text: "Icons and holy images deserve veneration and respect.",
                             orthodox: true,
                             council: "Nicaea II",
-                            heresyPoints: 1
+                            heresyPoints: 1,
+                            timeLimit: 30
                         },
                         {
                             text: "The bread and wine merely symbolize Christ's body and blood.",
                             orthodox: false,
                             council: "Trent",
-                            heresyPoints: 1
+                            heresyPoints: 1,
+                            timeLimit: 30
+                        },
+                        {
+                            text: "Scripture alone is the ultimate authority for Christian faith.",
+                            orthodox: false,
+                            council: "Trent",
+                            heresyPoints: 1,
+                            timeLimit: 30
+                        },
+                        {
+                            text: "Mary remained a virgin throughout her entire life.",
+                            orthodox: true,
+                            council: "General Tradition",
+                            heresyPoints: 1,
+                            timeLimit: 30
+                        },
+                        {
+                            text: "Christians can lose their salvation through serious sin.",
+                            orthodox: true,
+                            council: "Trent",
+                            heresyPoints: 1,
+                            timeLimit: 30
+                        },
+                        {
+                            text: "The Pope is infallible when speaking ex cathedra.",
+                            orthodox: true,
+                            council: "Vatican I",
+                            heresyPoints: 1,
+                            timeLimit: 30
+                        },
+                        {
+                            text: "Purgatory exists as a state of purification after death.",
+                            orthodox: true,
+                            council: "Trent",
+                            heresyPoints: 1,
+                            timeLimit: 30
+                        },
+                        {
+                            text: "Baptism is necessary for salvation.",
+                            orthodox: true,
+                            council: "General Tradition",
+                            heresyPoints: 1,
+                            timeLimit: 30
+                        },
+                        {
+                            text: "Speaking in tongues is required evidence of salvation.",
+                            orthodox: false,
+                            council: "Contemporary Orthodoxy",
+                            heresyPoints: 1,
+                            timeLimit: 30
+                        },
+                        {
+                            text: "Priests should be allowed to marry.",
+                            orthodox: false,
+                            council: "General Tradition",
+                            heresyPoints: 1,
+                            timeLimit: 30
+                        }
+                    ],
+                    medium: [
+                        {
+                            id: 1,
+                            text: "What is the term for the belief that Jesus is of the same substance as the Father?",
+                            options: ["Arianism", "Homoousios", "Nestorianism", "Monophysitism"],
+                            answer: "Homoousios",
+                            council: "Nicaea",
+                            heresyPoints: 1,
+                            timeLimit: 25
+                        },
+                        {
+                            id: 2,
+                            text: "Which council declared Arianism a heresy?",
+                            options: ["Council of Chalcedon", "Council of Nicaea", "Council of Trent", "Council of Ephesus"],
+                            answer: "Council of Nicaea",
+                            council: "Nicaea",
+                            heresyPoints: 1,
+                            timeLimit: 25
+                        },
+                        {
+                            id: 3,
+                            text: "What does 'Theotokos' mean?",
+                            options: ["God-bearer", "Holy Virgin", "Mother of Christ", "Blessed Woman"],
+                            answer: "God-bearer",
+                            council: "Ephesus",
+                            heresyPoints: 1,
+                            timeLimit: 25
+                        },
+                        {
+                            id: 4,
+                            text: "Which heresy taught that Christ had only one nature?",
+                            options: ["Arianism", "Nestorianism", "Monophysitism", "Pelagianism"],
+                            answer: "Monophysitism",
+                            council: "Chalcedon",
+                            heresyPoints: 1,
+                            timeLimit: 25
+                        },
+                        {
+                            id: 5,
+                            text: "What did the Council of Trent affirm about Scripture and Tradition?",
+                            options: ["Scripture alone", "Tradition alone", "Both Scripture and Tradition", "Neither has authority"],
+                            answer: "Both Scripture and Tradition",
+                            council: "Trent",
+                            heresyPoints: 1,
+                            timeLimit: 25
+                        },
+                        {
+                            id: 6,
+                            text: "Which doctrine was defined at the Council of Ephesus?",
+                            options: ["Trinity", "Incarnation", "Mary as Theotokos", "Papal Infallibility"],
+                            answer: "Mary as Theotokos",
+                            council: "Ephesus",
+                            heresyPoints: 1,
+                            timeLimit: 25
+                        },
+                        {
+                            id: 7,
+                            text: "What is transubstantiation?",
+                            options: ["Symbolic presence", "Spiritual presence", "Real substantial change", "Memorial only"],
+                            answer: "Real substantial change",
+                            council: "Trent",
+                            heresyPoints: 1,
+                            timeLimit: 25
+                        },
+                        {
+                            id: 8,
+                            text: "Which council dealt with the Iconoclastic controversy?",
+                            options: ["Nicaea I", "Nicaea II", "Chalcedon", "Trent"],
+                            answer: "Nicaea II",
+                            council: "Nicaea II",
+                            heresyPoints: 1,
+                            timeLimit: 25
+                        },
+                        {
+                            id: 9,
+                            text: "What is the Filioque controversy about?",
+                            options: ["Mary's virginity", "Christ's nature", "Holy Spirit's procession", "Papal authority"],
+                            answer: "Holy Spirit's procession",
+                            council: "Eastern Orthodoxy",
+                            heresyPoints: 1,
+                            timeLimit: 25
+                        },
+                        {
+                            id: 10,
+                            text: "Which heresy did Pelagius teach?",
+                            options: ["Denial of Trinity", "Salvation by works alone", "Christ's divinity", "Papal supremacy"],
+                            answer: "Salvation by works alone",
+                            council: "Carthage",
+                            heresyPoints: 1,
+                            timeLimit: 25
                         }
                     ],
                     hard: [
                         {
-                            text: "Grace is irresistible and determines salvation entirely.",
-                            orthodox: false,
+                            id: 1,
+                            text: "What is the precise theological term for Christ's two natures in one person?",
+                            options: ["Hypostatic Union", "Theandric Union", "Communicatio Idiomatum", "Perichoresis"],
+                            answer: "Hypostatic Union",
+                            council: "Chalcedon",
+                            heresyPoints: 1,
+                            timeLimit: 20
+                        },
+                        {
+                            id: 2,
+                            text: "Which heresy taught that Christ's human will was absorbed by His divine will?",
+                            options: ["Nestorianism", "Monophysitism", "Monothelitism", "Apollinarianism"],
+                            answer: "Monothelitism",
+                            council: "Constantinople III",
+                            heresyPoints: 1,
+                            timeLimit: 20
+                        },
+                        {
+                            id: 3,
+                            text: "What is the 'Filioque' clause controversy specifically about?",
+                            options: ["Whether the Spirit proceeds from Father only", "Whether the Spirit proceeds from Father and Son", "Whether the Spirit is divine", "Whether the Spirit is a person"],
+                            answer: "Whether the Spirit proceeds from Father and Son",
+                            council: "Eastern Orthodoxy",
+                            heresyPoints: 1,
+                            timeLimit: 20
+                        },
+                        {
+                            id: 4,
+                            text: "According to Chalcedon, Christ's two natures are united:",
+                            options: ["Without confusion, change, division, or separation", "In perfect harmony and balance", "Through divine transformation", "By human cooperation"],
+                            answer: "Without confusion, change, division, or separation",
+                            council: "Chalcedon",
+                            heresyPoints: 1,
+                            timeLimit: 20
+                        },
+                        {
+                            id: 5,
+                            text: "What is the technical term for the communication of properties between Christ's natures?",
+                            options: ["Communicatio Idiomatum", "Hypostatic Union", "Theandric Activity", "Perichoretic Exchange"],
+                            answer: "Communicatio Idiomatum",
+                            council: "Chalcedon",
+                            heresyPoints: 1,
+                            timeLimit: 20
+                        },
+                        {
+                            id: 6,
+                            text: "Which council condemned the 'Three Chapters' controversy?",
+                            options: ["Constantinople I", "Constantinople II", "Constantinople III", "Ephesus"],
+                            answer: "Constantinople II",
+                            council: "Constantinople II",
+                            heresyPoints: 1,
+                            timeLimit: 20
+                        },
+                        {
+                            id: 7,
+                            text: "What is the theological term for the belief in Christ's pre-existence of souls?",
+                            options: ["Origenism", "Apollinarianism", "Nestorianism", "Eutychianism"],
+                            answer: "Origenism",
+                            council: "Constantinople II",
+                            heresyPoints: 1,
+                            timeLimit: 20
+                        },
+                        {
+                            id: 8,
+                            text: "According to Trent, what is the relationship between faith and works in justification?",
+                            options: ["Faith alone suffices", "Works alone suffice", "Faith and works cooperate", "Neither is necessary"],
+                            answer: "Faith and works cooperate",
                             council: "Trent",
-                            heresyPoints: 1
+                            heresyPoints: 1,
+                            timeLimit: 20
                         }
                     ],
                     councils: {
@@ -838,10 +1397,66 @@
                         }
                     }
                 };
+                
+                // Fallback profile quiz data
+                profileQuizData = [
+                    {
+                        id: 1,
+                        question: "How often dost thou search the Sacred Scriptures?",
+                        options: [
+                            { text: "Rarely or never — the Word is foreign to me", score: 0 },
+                            { text: "Sometimes at worship or when guided by others", score: 1 },
+                            { text: "Often in personal study and devotion", score: 2 },
+                            { text: "Daily with commentaries and deep contemplation", score: 3 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        question: "Hast thou knowledge of the ancient Councils and their fiery debates?",
+                        options: [
+                            { text: "I know not of such matters", score: 0 },
+                            { text: "I have heard whispers of Nicaea, perhaps", score: 1 },
+                            { text: "I know of the great heresies like Arianism", score: 2 },
+                            { text: "I can debate Nestorianism at the dinner table", score: 3 }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        question: "Which fold of Christendom dost thou most resemble?",
+                        options: [
+                            { text: "The Roman Catholic Church", tag: "catholic" },
+                            { text: "The Protestant Reformation", tag: "protestant" },
+                            { text: "The Eastern Orthodox Church", tag: "orthodox" },
+                            { text: "The Pentecostal & Charismatic Movement", tag: "charismatic" },
+                            { text: "None — I am but a curious seeker", tag: "none" }
+                        ]
+                    },
+                    {
+                        id: 4,
+                        question: "How severe shall thy doctrinal trial be?",
+                        options: [
+                            { text: "Gentle — spare me the theological torment", difficulty: "easy" },
+                            { text: "Moderate — test me but show mercy", difficulty: "medium" },
+                            { text: "Severe — unleash the full theological gauntlet!", difficulty: "hard" }
+                        ]
+                    }
+                ];
             }
         }
 
         function showStartScreen() {
+            const container = document.getElementById('gameContainer');
+            
+            // Check if player has existing profile
+            if (hasStoredProfile()) {
+                loadPlayerProfile();
+                showReturningPlayerScreen();
+            } else {
+                showNewPlayerScreen();
+            }
+        }
+
+        function showNewPlayerScreen() {
             const container = document.getElementById('gameContainer');
             container.innerHTML = `
                 <h1>How Heretical Are You?</h1>
@@ -849,35 +1464,263 @@
                 <div class="decorative-border"></div>
                 <div class="start-text">
                     By decree of the Holy Council, thou art summoned to answer questions of doctrine most grave. 
-                    Choose thy trial difficulty, then thy words with care, lest ye be found wanting in orthodoxy.
+                    But first, we must know thy spiritual disposition...
                 </div>
                 <div class="wax-seal">✝</div>
-                <div class="start-text" style="margin-top: 20px; font-weight: 600;">
-                    Select Thy Trial Difficulty:
+                <div class="start-text" style="margin-top: 20px; font-weight: 600; font-size: 1.1em;">
+                    Prepare for thy Examination:
                 </div>
-                <div class="button-group">
-                    <button class="button difficulty-easy" onclick="startGame('easy')">
-                        Easy Trial<br>
-                        <small style="font-size: 0.8em; font-weight: normal;">(Basic Doctrines)</small>
+                <button class="button" onclick="startProfileQuiz()" style="margin-top: 20px;">
+                    Begin the Inquisition
+                </button>
+            `;
+        }
+
+        function showReturningPlayerScreen() {
+            const container = document.getElementById('gameContainer');
+            
+            // Determine difficulty from stored profile
+            let finalDifficulty = playerProfile.preferredDifficulty;
+            if (playerProfile.preferredDifficulty === 'easy' && profileAnswers.length >= 4) {
+                const lastAnswer = profileAnswers[3]?.selectedOption;
+                if (!lastAnswer?.difficulty) {
+                    if (playerProfile.knowledgeScore <= 2) finalDifficulty = 'easy';
+                    else if (playerProfile.knowledgeScore <= 4) finalDifficulty = 'medium';
+                    else finalDifficulty = 'hard';
+                }
+            }
+
+            const streamName = getStreamDisplayName(playerProfile.streamTag);
+            const difficultyName = finalDifficulty.charAt(0).toUpperCase() + finalDifficulty.slice(1);
+            
+            container.innerHTML = `
+                <h1>Welcome Back, Heretic</h1>
+                <div class="subtitle">The Council Remembers Thee</div>
+                <div class="decorative-border"></div>
+                <div class="start-text">
+                    Thy profile is known to us, ${streamName.toLowerCase()} soul. 
+                    The Council has prepared thy customized trial...
+                </div>
+                <div class="wax-seal">⚔️</div>
+                <div class="start-text" style="background: rgba(139, 69, 19, 0.1); padding: 15px; border-radius: 5px; margin: 20px 0;">
+                    <strong>Thy Known Profile:</strong><br>
+                    Stream: ${streamName}<br>
+                    Trial Level: ${difficultyName}
+                </div>
+                <div class="button-group" style="gap: 15px;">
+                    <button class="button" onclick="proceedWithStoredProfile('${finalDifficulty}')" style="background: linear-gradient(to bottom, #2E7D32, #1B5E20);">
+                        Face Thy Judgment
                     </button>
-                    <button class="button difficulty-medium" onclick="startGame('medium')">
-                        Moderate Trial<br>
-                        <small style="font-size: 0.8em; font-weight: normal;">(Theological Nuances)</small>
-                    </button>
-                    <button class="button difficulty-hard" onclick="startGame('hard')">
-                        Severe Trial<br>
-                        <small style="font-size: 0.8em; font-weight: normal;">(Esoteric Theology)</small>
+                    <button class="button" onclick="clearProfileAndRestart()" style="background: linear-gradient(to bottom, #DC143C, #8B0000); font-size: 0.9em; padding: 10px 20px;">
+                        📜 Re-stand Before the Council
                     </button>
                 </div>
             `;
+        }
+
+        // Profile Quiz Functions
+        function startProfileQuiz() {
+            currentProfileQuestion = 0;
+            profileAnswers = [];
+            playerProfile = {
+                knowledgeScore: 0,
+                streamTag: 'none',
+                preferredDifficulty: 'easy'
+            };
+            showProfileQuestion();
+        }
+
+        function showProfileQuestion() {
+            if (currentProfileQuestion >= profileQuizData.length) {
+                processProfileResults();
+                return;
+            }
+
+            const question = profileQuizData[currentProfileQuestion];
+            const container = document.getElementById('gameContainer');
+            
+            // Calculate progress percentage
+            const progressPercent = ((currentProfileQuestion + 1) / profileQuizData.length) * 100;
+            
+            container.innerHTML = `
+                <div class="question-container">
+                    <div class="question-number">📜 Examination Question ${currentProfileQuestion + 1} of ${profileQuizData.length}</div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="profile-progress" style="width: 100%; background: rgba(139, 69, 19, 0.2); border-radius: 10px; margin: 15px 0; height: 8px; overflow: hidden;">
+                        <div style="width: ${progressPercent}%; background: linear-gradient(to right, #8B4513, #A0522D); height: 100%; border-radius: 10px; transition: width 0.3s ease;"></div>
+                    </div>
+                    
+                    <div class="decorative-border"></div>
+                    <div class="question-text" style="background: rgba(139, 69, 19, 0.05); border-left: 3px solid #8B4513; border-right: 3px solid #8B4513;">${question.question}</div>
+                    <div class="options-container" style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto;">
+                        ${question.options.map((option, index) => `
+                            <button class="option-button" onclick="answerProfileQuestion(${index})"
+                                style="
+                                    background: linear-gradient(to bottom, #8B4513, #654321);
+                                    color: #F4E8D0;
+                                    border: 2px solid #5D4037;
+                                    padding: 15px 20px;
+                                    font-size: 0.95em;
+                                    font-family: 'Cinzel', serif;
+                                    font-weight: 600;
+                                    cursor: pointer;
+                                    border-radius: 3px;
+                                    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+                                    transition: all 0.3s ease;
+                                    text-align: center;
+                                    width: 100%;
+                                    line-height: 1.3;
+                                "
+                                onmouseover="this.style.background='linear-gradient(to bottom, #A0522D, #8B4513)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.4)';"
+                                onmouseout="this.style.background='linear-gradient(to bottom, #8B4513, #654321)'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.3)';"
+                            >
+                                ${option.text}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function answerProfileQuestion(optionIndex) {
+            const question = profileQuizData[currentProfileQuestion];
+            const selectedOption = question.options[optionIndex];
+            
+            // Store the answer
+            profileAnswers.push({
+                questionId: question.id,
+                selectedOption: selectedOption,
+                optionIndex: optionIndex
+            });
+            
+            // Process the answer based on its properties
+            if (selectedOption.score !== undefined) {
+                playerProfile.knowledgeScore += selectedOption.score;
+            }
+            if (selectedOption.tag !== undefined) {
+                playerProfile.streamTag = selectedOption.tag;
+            }
+            if (selectedOption.difficulty !== undefined) {
+                playerProfile.preferredDifficulty = selectedOption.difficulty;
+            }
+            
+            currentProfileQuestion++;
+            setTimeout(showProfileQuestion, 300);
+        }
+
+        function processProfileResults() {
+            // Determine final difficulty based on knowledge score and preference
+            let finalDifficulty = playerProfile.preferredDifficulty;
+            
+            // If no explicit preference, use knowledge score
+            if (playerProfile.preferredDifficulty === 'easy' && profileAnswers[3]?.selectedOption?.difficulty === undefined) {
+                if (playerProfile.knowledgeScore <= 2) {
+                    finalDifficulty = 'easy';
+                } else if (playerProfile.knowledgeScore <= 4) {
+                    finalDifficulty = 'medium';
+                } else {
+                    finalDifficulty = 'hard';
+                }
+            }
+            
+            // Save profile to localStorage
+            savePlayerProfile();
+            
+            console.log('Profile Results:', playerProfile);
+            console.log('Final Difficulty:', finalDifficulty);
+            
+            // Show personalized intro and start game
+            showPersonalizedIntro(finalDifficulty);
+        }
+
+        function showPersonalizedIntro(difficulty) {
+            const container = document.getElementById('gameContainer');
+            
+            // Create personalized message based on profile
+            let personalMessage = '';
+            let difficultyDescription = '';
+            
+            switch(playerProfile.streamTag) {
+                case 'catholic':
+                    personalMessage = 'Ah, a son/daughter of Rome! Let us see if thy allegiance to the Magisterium holds firm...';
+                    break;
+                case 'protestant':
+                    personalMessage = 'A child of the Reformation! Thy sola scriptura shall be tested against the ancient councils...';
+                    break;
+                case 'orthodox':
+                    personalMessage = 'From the Eastern Church! Let us examine thy adherence to the Seven Councils...';
+                    break;
+                case 'charismatic':
+                    personalMessage = 'A Pentecostal spirit! Thy gifts and doctrines shall face scrutiny...';
+                    break;
+                default:
+                    personalMessage = 'A curious seeker! Let us discover where thy theological sympathies truly lie...';
+            }
+            
+            switch(difficulty) {
+                case 'easy':
+                    difficultyDescription = 'Gentle Trial - Basic Doctrines (15 questions)';
+                    break;
+                case 'medium':
+                    difficultyDescription = 'Moderate Trial - Theological Nuances (10 questions)';
+                    break;
+                case 'hard':
+                    difficultyDescription = 'Severe Trial - Esoteric Theology (8 questions)';
+                    break;
+            }
+            
+            container.innerHTML = `
+                <div class="question-container">
+                    <h1 style="font-size: 1.8em; margin-bottom: 20px;">Thy Profile is Known</h1>
+                    <div class="decorative-border"></div>
+                    <div class="question-text" style="font-size: 1.1em; margin-bottom: 25px;">
+                        ${personalMessage}
+                    </div>
+                    <div class="start-text" style="background: rgba(139, 69, 19, 0.1); padding: 15px; border-radius: 5px; margin: 20px 0;">
+                        <strong>Thy Trial:</strong> ${difficultyDescription}
+                    </div>
+                    <div class="decorative-border"></div>
+                    <button class="button" onclick="startGame('${difficulty}')" style="margin-top: 25px;">
+                        Face Thy Judgment
+                    </button>
+                </div>
+            `;
+        }
+
+        // Helper functions for returning players
+        function proceedWithStoredProfile(difficulty) {
+            // Skip personalized intro and go straight to game
+            startGame(difficulty);
+        }
+
+        function clearProfileAndRestart() {
+            clearPlayerProfile();
+            showNewPlayerScreen();
         }
 
         function startGame(difficulty) {
             currentDifficulty = difficulty;
             const allQuestions = questionsData[difficulty] || questionsData.easy;
             console.log(`Starting ${difficulty} mode with ${allQuestions.length} total questions`);
-            // Randomly select 10 questions from the pool
-            currentQuestions = getRandomQuestions(allQuestions, 10);
+            
+            // Select more questions based on difficulty
+            let questionCount;
+            switch(difficulty) {
+                case 'easy': questionCount = Math.min(15, allQuestions.length); break;
+                case 'medium': questionCount = Math.min(10, allQuestions.length); break;
+                case 'hard': questionCount = Math.min(8, allQuestions.length); break;
+                default: questionCount = 10;
+            }
+            
+            // Filter questions based on player's stream if applicable
+            let filteredQuestions = allQuestions;
+            if (playerProfile.streamTag && playerProfile.streamTag !== 'none') {
+                filteredQuestions = filterQuestionsByStream(allQuestions, playerProfile.streamTag);
+                console.log(`Filtered ${filteredQuestions.length} questions for ${playerProfile.streamTag} stream`);
+            }
+            
+            currentQuestions = getRandomQuestions(filteredQuestions, questionCount);
             console.log(`Selected ${currentQuestions.length} questions for gameplay`);
             currentQuestion = 0;
             globalScore = 0;
@@ -1227,6 +2070,17 @@
             return quips[Math.floor(Math.random() * quips.length)];
         }
 
+        function getStreamDisplayName(streamTag) {
+            const streamNames = {
+                'catholic': 'Roman Catholic',
+                'protestant': 'Protestant',
+                'orthodox': 'Eastern Orthodox',
+                'charismatic': 'Pentecostal/Charismatic',
+                'none': 'Curious Seeker'
+            };
+            return streamNames[streamTag] || 'Unknown';
+        }
+
         function showVerdict() {
             let verdictType, verdictClass, verdictTitle, verdictIcon, verdictText, badge, quipCategory;
             
@@ -1237,9 +2091,7 @@
                 verdictTitle = '✨ Most Orthodox';
                 verdictIcon = '🏅';
                 badge = '🏅 Guardian of Orthodoxy';
-                verdictText = `Thy doctrine is pure as spring water.<br>
-                    You've offended neither bishop nor council,<br>
-                    and your halo remains untarnished.`;
+                verdictText = `Pure doctrine, untarnished faith.<br>The councils smile upon thee.`;
                 quipCategory = 'faithful';
             } else if (globalScore <= 6) {
                 verdictType = 'borderline';
@@ -1247,8 +2099,7 @@
                 verdictTitle = '⚖️ Borderline Heretic';
                 verdictIcon = '⚔️';
                 badge = '⚔️ Suspiciously Orthodox';
-                verdictText = `You balance precariously upon the razor's edge of truth.<br>
-                    One step further, and the Inquisition shall come knocking.`;
+                verdictText = `Walking the razor's edge of truth.<br>The Inquisition watches...`;
                 quipCategory = 'borderline';
             } else {
                 verdictType = 'doomed';
@@ -1256,9 +2107,7 @@
                 verdictTitle = '🔥 Arch-Heretic';
                 verdictIcon = '🔥';
                 badge = '🔥 Condemned Eternal';
-                verdictText = `Your words drip with blasphemy.<br>
-                    The Councils rage, the Bishops scowl,<br>
-                    and the flames of the pyre are stoked in your honor.`;
+                verdictText = `Blasphemy incarnate!<br>The pyre awaits thy arrival.`;
                 quipCategory = 'doomed';
             }
             
@@ -1300,14 +2149,18 @@
                 `;
             }
             
-            // Build score breakdown
+            // Build compact score breakdown for mobile
             let scoreBreakdown = '';
             if (Object.keys(councilScores).length > 0) {
-                scoreBreakdown = '<div style="margin-top: 20px; font-size: 0.9em; color: #5D4037;"><strong>Heresy Points by Council:</strong><br>';
-                for (const [council, score] of Object.entries(councilScores).sort((a, b) => b[1] - a[1])) {
-                    scoreBreakdown += `${council}: ${score}<br>`;
+                const topCouncils = Object.entries(councilScores)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3); // Show only top 3 councils
+                
+                scoreBreakdown = '<div style="margin-top: 15px; font-size: 0.85em; color: #5D4037;"><strong>Top Offenses:</strong><br>';
+                for (const [council, score] of topCouncils) {
+                    scoreBreakdown += `${council}: ${score} • `;
                 }
-                scoreBreakdown += '</div>';
+                scoreBreakdown = scoreBreakdown.slice(0, -3) + '</div>'; // Remove last bullet
             }
             
             // Get random flavor quip
@@ -1341,7 +2194,8 @@
                             
                             <div class="score-summary">
                                 <strong>Total Heresy Points:</strong> ${globalScore}<br>
-                                <strong>Trial Difficulty:</strong> ${currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1)}
+                                <strong>Trial Difficulty:</strong> ${currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1)}<br>
+                                <strong>Theological Stream:</strong> ${getStreamDisplayName(playerProfile.streamTag)}
                                 ${scoreBreakdown}
                             </div>
                             
@@ -1349,7 +2203,12 @@
                             
                             <div class="decorative-border"></div>
                             
-                            <button class="button" onclick="showStartScreen()">Face Trial Again</button>
+                            <div class="button-group" style="gap: 15px;">
+                                <button class="button" onclick="showStartScreen()">Face Trial Again</button>
+                                <button class="button" onclick="clearProfileAndRestart()" style="background: linear-gradient(to bottom, #DC143C, #8B0000); font-size: 0.9em; padding: 10px 20px;">
+                                    📜 Re-stand Before the Council
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

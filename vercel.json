@@ -1,6 +1,6 @@
 {
-    "rewrites":[
-        {"source":"/(.*)","destination":"/"}
-    
-    ]
+  "routes": [
+    { "src": "/", "dest": "/heretical-game.html" },
+    { "src": "/public/(.*)", "dest": "/public/$1" }
+  ]
 }
