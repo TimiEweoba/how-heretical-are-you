@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Game</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #8B4513, #CD853F);
+            font-family: serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .parchment {
+            background: linear-gradient(to bottom, #F4E8D0, #E8D5B7);
+            border: 3px solid #8B4513;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            min-height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="parchment" id="gameContainer">
+            <!-- Content will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        console.log('Script starting...');
+        
+        function showStartScreen() {
+            console.log('showStartScreen called');
+            const container = document.getElementById('gameContainer');
+            if (!container) {
+                console.error('Container not found!');
+                return;
+            }
+            
+            container.innerHTML = `
+                <h1>How Heretical Are You?</h1>
+                <div>A Trial of Doctrine</div>
+                <p>By decree of the Holy Council, thou art summoned to answer questions of doctrine most grave.</p>
+                <button onclick="alert('Game would start here!')">Begin the Inquisition</button>
+            `;
+            console.log('Start screen displayed');
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded');
+            showStartScreen();
+        });
+        
+        console.log('Script loaded');
+    </script>
+</body>
+</html>
