@@ -869,6 +869,46 @@
                 transform: translateY(-200px);
                 right: 0;
             }
+
+            /* Mobile: floating notification for councils */
+            .council-fab {
+                position: fixed;
+                right: 16px;
+                bottom: 16px;
+                display: none; /* toggled by .show */
+                align-items: center;
+                gap: 8px;
+                background: rgba(93, 64, 55, 0.95);
+                color: #F4E8D0;
+                border: 2px solid #8B4513;
+                border-radius: 999px;
+                padding: 8px 12px;
+                font-family: 'Cinzel', serif;
+                font-weight: 600;
+                box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+                z-index: 1100;
+                cursor: pointer;
+            }
+
+            .council-fab .icon { font-size: 1.1em; }
+            .council-fab .count {
+                background: #DC143C;
+                color: #fff;
+                border-radius: 999px;
+                padding: 2px 8px;
+                font-size: 0.8em;
+            }
+
+            .council-fab.show { display: flex; }
+
+            .council-fab.unread {
+                animation: fabPulse 1.2s ease-in-out infinite;
+            }
+
+            @keyframes fabPulse {
+                0%, 100% { transform: scale(1); box-shadow: 0 6px 16px rgba(0,0,0,0.35); }
+                50% { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.45); }
+            }
             
             /* Mobile sidebar header - make it tappable to toggle */
             .sidebar-header {
@@ -1054,6 +1094,13 @@
                 <!-- Council items will be added here dynamically -->
             </div>
         </div>
+
+        <!-- Mobile floating notification (shown only on mobile via CSS) -->
+        <button id="councilFab" class="council-fab" onclick="toggleCouncilSidebar()" aria-label="Councils Offended">
+            <span class="icon">⚔️</span>
+            <span>Councils</span>
+            <span id="councilFabCount" class="count">0</span>
+        </button>
     </div>
 
     <script>
@@ -1068,6 +1115,7 @@
         let questionTimer = null;
         let orthodoxPoints = 0;
         let sidebarVisible = false;
+        let councilsViewed = false; // mobile: whether user has viewed the sidebar since last new council
         
         // Profile Quiz Variables
         let profileQuizData = null;
@@ -2011,11 +2059,14 @@
             const questionCount = 10;
             
             // Get fresh questions (filter out already used ones)
+            // Capture used count BEFORE filtering to accurately detect a reset
+            const usedBefore = getUsedQuestionIds(difficulty).length;
             let freshQuestions = getFreshQuestions(allQuestions, difficulty);
             console.log(`Fresh questions after filtering: ${freshQuestions.length}`);
             
-            // Check if we reset the pool (all questions were used)
-            const wasReset = freshQuestions.length === allQuestions.length && getUsedQuestionIds(difficulty).length === 0;
+            // Check if we reset the pool (all questions were used previously)
+            // Only consider it a reset if there WERE used questions, and now storage is cleared
+            const wasReset = (usedBefore > 0) && (freshQuestions.length === allQuestions.length) && (getUsedQuestionIds(difficulty).length === 0);
             
             // Filter questions based on player's stream if applicable
             let filteredQuestions = freshQuestions;
@@ -2300,12 +2351,17 @@
             const sidebar = document.getElementById('councilSidebar');
             sidebar.classList.add('visible');
             sidebarVisible = true;
+            // Hide mobile FAB when sidebar is open
+            hideCouncilNotification();
+            councilsViewed = true;
         }
 
         function hideCouncilSidebar() {
             const sidebar = document.getElementById('councilSidebar');
             sidebar.classList.remove('visible');
             sidebarVisible = false;
+            // On mobile, show FAB (if there are councils) when sidebar is hidden
+            maybeShowCouncilNotification();
         }
 
         function toggleCouncilSidebar() {
@@ -2313,6 +2369,36 @@
                 hideCouncilSidebar();
             } else {
                 showCouncilSidebar();
+            }
+        }
+        
+        // Mobile FAB helpers
+        function isMobile() {
+            return window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
+        }
+
+        function showCouncilNotification(unread = false) {
+            const fab = document.getElementById('councilFab');
+            if (!fab) return;
+            fab.classList.add('show');
+            if (unread) fab.classList.add('unread');
+        }
+
+        function hideCouncilNotification() {
+            const fab = document.getElementById('councilFab');
+            if (!fab) return;
+            fab.classList.remove('show');
+            fab.classList.remove('unread');
+        }
+
+        function maybeShowCouncilNotification() {
+            if (!isMobile()) return; // desktop: no FAB
+            const councilCount = Object.keys(councilScores).length;
+            if (councilCount > 0 && !councilsViewed) {
+                // Show without unread pulse if user already viewed
+                showCouncilNotification(false);
+            } else {
+                hideCouncilNotification();
             }
         }
         
@@ -2338,8 +2424,15 @@
                 `;
                 councilList.appendChild(councilItem);
                 
-                // Show sidebar if first council
-                showCouncilSidebar();
+                // Behavior on first/new council
+                if (isMobile()) {
+                    // Do not auto-open on mobile; show minimal notification
+                    councilsViewed = false;
+                    showCouncilNotification(true);
+                } else {
+                    // Desktop: keep original behavior
+                    showCouncilSidebar();
+                }
             }
             
             // Update council count badge
@@ -2348,13 +2441,16 @@
         
         function updateCouncilCountBadge() {
             const countBadge = document.getElementById('councilCount');
+            const fabCount = document.getElementById('councilFabCount');
             const councilCount = Object.keys(councilScores).length;
             
             if (councilCount > 0) {
                 countBadge.textContent = councilCount;
                 countBadge.style.display = 'inline';
+                if (fabCount) fabCount.textContent = councilCount;
             } else {
                 countBadge.style.display = 'none';
+                if (fabCount) fabCount.textContent = '0';
             }
         }
         
@@ -2363,6 +2459,8 @@
             councilList.innerHTML = '';
             hideCouncilSidebar();
             updateCouncilCountBadge();
+            hideCouncilNotification();
+            councilsViewed = false;
         }
 
         // Handle multiple choice answers (easy mode)
