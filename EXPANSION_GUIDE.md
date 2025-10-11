@@ -50,10 +50,8 @@ Start with current 30/30/30 pool. The localStorage system prevents repeats, so e
 - `resetUsedQuestions()` - Clears when pool exhausted
 - `showPoolResetMessage()` - Displays dramatic message
 
-**localStorage keys:**
-- `usedQuestions_easy`
-- `usedQuestions_medium`  
-- `usedQuestions_hard`
+**localStorage key:**
+- `usedQuestions` (stores array of `${difficulty}_${id}` for global tracking across difficulties)
 
 ## 📝 Sample Questions to Add
 
