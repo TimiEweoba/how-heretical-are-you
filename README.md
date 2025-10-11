@@ -1,88 +1,124 @@
-# How Heretical Are You? - A Trial of Doctrine
+# 🕹️ The Heretical Game
+**A web-based theological thought experiment disguised as a game.**
 
-An interactive theological quiz game that tests your knowledge of orthodox Christian doctrine through the lens of various church councils throughout history.
+Test your orthodoxy. Annoy the councils. Survive the verdicts.  
+Will you walk away as *faithful*, *borderline*, or *excommunicated*?
 
-## Features
+---
 
-### 🎯 Three Difficulty Levels
-- **Easy Trial**: Basic doctrines about the Trinity, Christ's nature, and fundamental beliefs
-- **Moderate Trial**: Theological nuances including papal authority, transubstantiation, and iconography
-- **Severe Trial**: Esoteric theological concepts like essence-energies distinction and predestination
+## 🎯 Overview
+The **Heretical Game** is a satirical, philosophy-meets-theology browser game where players face a series of doctrinal dilemmas inspired by Christian history — from the **Council of Nicaea** to **Contemporary Orthodoxy**.
 
-### ⚖️ Dynamic Verdict System
-- Your heresies are tracked by the specific councils you've offended
-- Each wrong answer is tied to a historical church council
-- Receive condemnations from the actual councils whose doctrines you've violated
-- Verdicts range from "Orthodox Champion" to "Arch-Heretic"
+Each choice offends (or pleases) one of these ancient councils, leading to **branching verdicts** and hilarious (or horrifying) endings.
 
-### 📜 Historical Councils Featured
-- Council of Nicaea (325 AD) - Trinity and Christ's divinity
-- Council of Chalcedon (451 AD) - Christ's two natures
-- Council of Constantinople (various) - Holy Spirit, Christ's will
-- Council of Trent (1545-1563) - Counter-Reformation doctrines
-- And many more!
+It’s a battle of wits between your intuition and centuries of dogma.  
+Think *Who Wants to Be a Millionaire*, but if the judges were bishops with grudges.
 
-## How to Play
+---
 
-### Method 1: Direct File Opening
-Simply open `heretical-game.html` in your web browser. 
+## ⚙️ Gameplay Loop
+1. **Select your difficulty:** Easy, Medium, or Hard.  
+2. **Face theological questions** drawn from a wide randomized pool.  
+   - No two playthroughs feel the same.  
+   - Repeat questions are avoided across sessions.  
+3. **Answer carefully.** Each choice affects multiple councils’ approval.  
+4. **Reach the final verdict:**
+   - Offend Nicaea → “Anathema! You are banished with Arius.”  
+   - Offend Trent → “Declared heretic. Your writings are burned.”  
+   - Offend Contemporary Orthodoxy → “You’re trending on X for all the wrong reasons.”  
 
-**Note**: Some browsers may block loading the questions from the JSON file due to CORS policies. If the questions don't load, use Method 2.
+Replayability is baked in — every session ends differently.
 
-### Method 2: Local Server (Recommended)
-1. Make sure you have Python installed
-2. Run the server script:
-   ```bash
-   python serve.py
-   ```
-3. The game will automatically open in your browser at `http://localhost:8000/heretical-game.html`
+---
 
-### Method 3: Manual Python Server
-1. Open a terminal in the game directory
-2. Run one of these commands:
-   ```bash
-   # Python 3
-   python -m http.server 8000
-   
-   # Python 2
-   python -m SimpleHTTPServer 8000
-   ```
-3. Open your browser to `http://localhost:8000/heretical-game.html`
+## 👥 Pseudo-Multiplayer (Old-School Save Codes)
+- After completing a run, your results are exported as a **JSON snippet**.  
+- You can **share that file** or **generate a link** (`?profile=BASE64DATA`) to let others view your outcome.  
+- No backend, no login, no fuss — just pure browser magic.  
 
-## File Structure
+---
 
-```
+## ❤️ Show Love
+If the councils haven’t condemned you yet, support the creator:  
+👉 [**Show Love on Selar**](https://selar.com/showlove/timieweoba)
+
+---
+
+## 🔗 Share Your Verdict
+Spread the gospel of heresy:
+
+| Platform | Share |
+|-----------|--------|
+| 🟢 WhatsApp | Share your result with your friends |
+| 🔵 Facebook | Post your ending verdict |
+| ⚫ X (Twitter) | Boast your theological downfall |
+
+(*Spectator mode has been removed — the councils don’t like freeloaders.*)
+
+---
+
+## 🧠 Tech Stack
+
+### Frontend
+- **HTML5** – Structure & content  
+- **CSS3** – Styling, animations, responsiveness  
+- **Vanilla JavaScript (ES6+)** – Game logic, interactivity, and state  
+
+### Data & Storage
+- **JSON** – Question database (`/public/questions.json`)  
+- **LocalStorage** – Profile persistence across sessions  
+- **No database** – 100% client-side, zero backend dependencies  
+
+### Development & Deployment
+- **Python HTTP Server** (`serve.py`) for local testing  
+- **Vercel** / **Netlify** for deployment  
+- **Static hosting only** – loads instantly, works offline  
+
+### Architecture
+- **Single Page Application (SPA)**  
+- **Functional Programming**: pure JS functions for logic  
+- **Event-driven UI**: DOM manipulation for question flow  
+- **Progressive Enhancement**: graceful fallback for older browsers  
+
+---
+
+## 🧩 File Structure
 heretical-game/
-├── heretical-game.html    # Main game file
+├── heretical-game.html # Main application file
 ├── public/
-│   └── questions.json     # Question database with councils
-├── serve.py              # Python server for local testing
-└── README.md            # This file
-```
+│ └── questions.json # Question database
+├── serve.py # Local dev server
+├── add_timers.py # Utility script
+├── vercel.json # Vercel config
+├── netlify.toml # Netlify config
+├── .gitignore # Version control exclusions
+└── README.md # This file
 
-## Gameplay
+---
 
-1. Select your difficulty level (Easy, Moderate, or Severe)
-2. Answer each theological statement with "Agree" or "Disagree"
-3. Try to match orthodox doctrine as defined by historical church councils
-4. Receive your verdict based on how many heresies you've committed
-5. See which specific councils condemn your theological errors!
+## ⚡ Performance
+- **Lightweight:** ~2000 lines of code (HTML/CSS/JS)
+- **Offline Ready:** Fully functional after initial load
+- **Fast Load:** No libraries, no frameworks
+- **Responsive:** Works on all modern browsers and mobile devices
 
-## Customization
+---
 
-You can easily add more questions by editing `public/questions.json`. Each question needs:
-- `text`: The theological statement
-- `orthodox`: Whether agreeing with it is orthodox (true) or heretical (false)
-- `council`: The ID of the council that ruled on this doctrine
+## 🧪 Experimental (Future Plans)
+- **AI-Generated Questions**: dynamically create new theological dilemmas and council reactions in real-time.  
+- **Dynamic Council Reactions**: personalized verdicts and “live” commentary using AI wrappers.  
+- **Global Leaderboards** (optional): if heresy ever needs ranking.
 
-## Historical Note
+---
 
-This game uses a simplified, Western/Catholic perspective on "orthodoxy" for gameplay purposes. Real theological history is far more complex, with different Christian traditions having varying views on these doctrines.
+## ✝️ Author
+**Timi Eweoba** — Writer, engineer, and cultural documentarian.  
+Working to bring reason, humor, and humanity into tech and storytelling.
 
-## License
+> “Truth, fact, and a little blasphemy — all in good faith.”
 
-Free to use and modify for educational and entertainment purposes.
+---
 
-## Enjoy Your Trial!
-
-May your orthodoxy shine bright... or may you discover just how heretical you truly are! ⚔️📿
+## 📜 License
+MIT License — free to remix, modify, or fork.  
+Just don’t call yourself orthodox when you do.
