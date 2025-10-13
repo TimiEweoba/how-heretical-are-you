@@ -1,0 +1,25 @@
+# Development files
+serve.py
+add_timers.py
+
+# Documentation (keep for reference but not needed for deployment)
+# *.md
+
+# IDE files
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Python cache (if any)
+__pycache__/
+*.pyc
