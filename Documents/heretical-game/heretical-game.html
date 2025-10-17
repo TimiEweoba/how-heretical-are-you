@@ -1348,7 +1348,7 @@
             console.log('Loading questions...');
             try {
                 console.log('Attempting to fetch questions.json...');
-                const response = await fetch('/public/questions.json');
+                const response = await fetch('/public/questions-expanded.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -1370,211 +1370,136 @@
                 questionsData = {
                     easy: [
                         {
-                            id: 1,
-                            text: "Did Jesus ever directly call Himself 'God' in the Gospels?",
-                            options: ["Yes", "No"],
-                            answer: "No",
-                            council: "Nicaea",
-                            heresyPoints: 1,
-                            timeLimit: 30
+                          "id": 83,
+                          "text": "Did Jesus perform exorcisms?",
+                          "options": [
+                            "Yes",
+                            "No"
+                          ],
+                          "answer": "Yes",
+                          "council": "General Scripture",
+                          "heresyPoints": 0,
+                          "timeLimit": 30
                         },
                         {
-                            id: 2,
-                            text: "Does the New Testament ever call the Holy Spirit 'God'?",
-                            options: ["Yes", "No"],
-                            answer: "Yes",
-                            council: "Nicaea",
-                            heresyPoints: 1,
-                            timeLimit: 30
+                          "id": 84,
+                          "text": "Is the Bible inspired by God?",
+                          "options": [
+                            "Yes",
+                            "No"
+                          ],
+                          "answer": "Yes",
+                          "council": "General Tradition",
+                          "heresyPoints": 1,
+                          "timeLimit": 30
                         },
                         {
-                            id: 3,
-                            text: "What did the Council of Nicaea condemn Arius for teaching?",
-                            options: ["Son was created", "Son is co-eternal"],
-                            answer: "Son was created",
-                            council: "Nicaea",
-                            heresyPoints: 1,
-                            timeLimit: 30
+                          "id": 85,
+                          "text": "Did Jesus teach the disciples to pray?",
+                          "options": [
+                            "Yes",
+                            "No"
+                          ],
+                          "answer": "Yes",
+                          "council": "General Scripture",
+                          "heresyPoints": 0,
+                          "timeLimit": 30
                         },
                         {
-                            id: 4,
-                            text: "The Council of Chalcedon defined Christ as...",
-                            options: ["1 person, 2 natures", "2 persons, 1 nature"],
-                            answer: "1 person, 2 natures",
-                            council: "Chalcedon",
-                            heresyPoints: 1,
-                            timeLimit: 30
+                          "id": 86,
+                          "text": "Is confession to a priest necessary?",
+                          "options": [
+                            "Yes",
+                            "No"
+                          ],
+                          "answer": "Yes",
+                          "council": "Trent",
+                          "heresyPoints": 1,
+                          "timeLimit": 30
                         },
                         {
-                            id: 5,
-                            text: "Why was Luther condemned at Worms?",
-                            options: ["Denied Trinity", "Refused to recant writings", "Denied sacraments"],
-                            answer: "Refused to recant writings",
-                            council: "Worms",
-                            heresyPoints: 1,
-                            timeLimit: 30
-                        },
-                        {
-                            text: "Icons and holy images deserve veneration and respect.",
-                            orthodox: true,
-                            council: "Nicaea II",
-                            heresyPoints: 1,
-                            timeLimit: 30
-                        },
-                        {
-                            text: "The bread and wine merely symbolize Christ's body and blood.",
-                            orthodox: false,
-                            council: "Trent",
-                            heresyPoints: 1,
-                            timeLimit: 30
-                        },
-                        {
-                            text: "Scripture alone is the ultimate authority for Christian faith.",
-                            orthodox: false,
-                            council: "Trent",
-                            heresyPoints: 1,
-                            timeLimit: 30
-                        },
-                        {
-                            text: "Mary remained a virgin throughout her entire life.",
-                            orthodox: true,
-                            council: "General Tradition",
-                            heresyPoints: 1,
-                            timeLimit: 30
-                        },
-                        {
-                            text: "Christians can lose their salvation through serious sin.",
-                            orthodox: true,
-                            council: "Trent",
-                            heresyPoints: 1,
-                            timeLimit: 30
-                        },
-                        {
-                            text: "The Pope is infallible when speaking ex cathedra.",
-                            orthodox: true,
-                            council: "Vatican I",
-                            heresyPoints: 1,
-                            timeLimit: 30
-                        },
-                        {
-                            text: "Purgatory exists as a state of purification after death.",
-                            orthodox: true,
-                            council: "Trent",
-                            heresyPoints: 1,
-                            timeLimit: 30
-                        },
-                        {
-                            text: "Baptism is necessary for salvation.",
-                            orthodox: true,
-                            council: "General Tradition",
-                            heresyPoints: 1,
-                            timeLimit: 30
-                        },
-                        {
-                            text: "Speaking in tongues is required evidence of salvation.",
-                            orthodox: false,
-                            council: "Contemporary Orthodoxy",
-                            heresyPoints: 1,
-                            timeLimit: 30
-                        },
-                        {
-                            text: "Priests should be allowed to marry.",
-                            orthodox: false,
-                            council: "General Tradition",
-                            heresyPoints: 1,
-                            timeLimit: 30
+                          "id": 87,
+                          "text": "Did Jesus heal the sick?",
+                          "options": [
+                            "Yes",
+                            "No"
+                          ],
+                          "answer": "Yes",
+                          "council": "General Scripture",
+                          "heresyPoints": 0,
+                          "timeLimit": 30
                         }
                     ],
                     medium: [
                         {
-                            id: 1,
-                            text: "What is the term for the belief that Jesus is of the same substance as the Father?",
-                            options: ["Arianism", "Homoousios", "Nestorianism", "Monophysitism"],
-                            answer: "Homoousios",
-                            council: "Nicaea",
-                            heresyPoints: 1,
-                            timeLimit: 25
+                          "id": 1,
+                          "text": "What is the term for the belief that Jesus is of the same substance as the Father?",
+                          "options": [
+                            "Arianism",
+                            "Homoousios",
+                            "Nestorianism",
+                            "Monophysitism"
+                          ],
+                          "answer": "Homoousios",
+                          "council": "Nicaea",
+                          "heresyPoints": 1,
+                          "timeLimit": 30
                         },
                         {
-                            id: 2,
-                            text: "Which council declared Arianism a heresy?",
-                            options: ["Council of Chalcedon", "Council of Nicaea", "Council of Trent", "Council of Ephesus"],
-                            answer: "Council of Nicaea",
-                            council: "Nicaea",
-                            heresyPoints: 1,
-                            timeLimit: 25
+                          "id": 2,
+                          "text": "Which council declared Arianism a heresy?",
+                          "options": [
+                            "Council of Chalcedon",
+                            "Council of Trent",
+                            "Council of Nicaea",
+                            "Council of Constantinople"
+                          ],
+                          "answer": "Council of Nicaea",
+                          "council": "Nicaea",
+                          "heresyPoints": 1,
+                          "timeLimit": 25
                         },
                         {
-                            id: 3,
-                            text: "What does 'Theotokos' mean?",
-                            options: ["God-bearer", "Holy Virgin", "Mother of Christ", "Blessed Woman"],
-                            answer: "God-bearer",
-                            council: "Ephesus",
-                            heresyPoints: 1,
-                            timeLimit: 25
+                          "id": 3,
+                          "text": "Who was the first Christian Roman Emperor?",
+                          "options": [
+                            "Constantine",
+                            "Augustus",
+                            "Nero",
+                            "Theodosius"
+                          ],
+                          "answer": "Constantine",
+                          "council": "General Tradition",
+                          "heresyPoints": 0.5,
+                          "timeLimit": 25
                         },
                         {
-                            id: 4,
-                            text: "Which heresy taught that Christ had only one nature?",
-                            options: ["Arianism", "Nestorianism", "Monophysitism", "Pelagianism"],
-                            answer: "Monophysitism",
-                            council: "Chalcedon",
-                            heresyPoints: 1,
-                            timeLimit: 25
+                          "id": 4,
+                          "text": "What year did the Council of Nicaea take place?",
+                          "options": [
+                            "313 AD",
+                            "325 AD",
+                            "451 AD",
+                            "1054 AD"
+                          ],
+                          "answer": "325 AD",
+                          "council": "Nicaea",
+                          "heresyPoints": 1,
+                          "timeLimit": 25
                         },
                         {
-                            id: 5,
-                            text: "What did the Council of Trent affirm about Scripture and Tradition?",
-                            options: ["Scripture alone", "Tradition alone", "Both Scripture and Tradition", "Neither has authority"],
-                            answer: "Both Scripture and Tradition",
-                            council: "Trent",
-                            heresyPoints: 1,
-                            timeLimit: 25
-                        },
-                        {
-                            id: 6,
-                            text: "Which doctrine was defined at the Council of Ephesus?",
-                            options: ["Trinity", "Incarnation", "Mary as Theotokos", "Papal Infallibility"],
-                            answer: "Mary as Theotokos",
-                            council: "Ephesus",
-                            heresyPoints: 1,
-                            timeLimit: 25
-                        },
-                        {
-                            id: 7,
-                            text: "What is transubstantiation?",
-                            options: ["Symbolic presence", "Spiritual presence", "Real substantial change", "Memorial only"],
-                            answer: "Real substantial change",
-                            council: "Trent",
-                            heresyPoints: 1,
-                            timeLimit: 25
-                        },
-                        {
-                            id: 8,
-                            text: "Which council dealt with the Iconoclastic controversy?",
-                            options: ["Nicaea I", "Nicaea II", "Chalcedon", "Trent"],
-                            answer: "Nicaea II",
-                            council: "Nicaea II",
-                            heresyPoints: 1,
-                            timeLimit: 25
-                        },
-                        {
-                            id: 9,
-                            text: "What is the Filioque controversy about?",
-                            options: ["Mary's virginity", "Christ's nature", "Holy Spirit's procession", "Papal authority"],
-                            answer: "Holy Spirit's procession",
-                            council: "Eastern Orthodoxy",
-                            heresyPoints: 1,
-                            timeLimit: 25
-                        },
-                        {
-                            id: 10,
-                            text: "Which heresy did Pelagius teach?",
-                            options: ["Denial of Trinity", "Salvation by works alone", "Christ's divinity", "Papal supremacy"],
-                            answer: "Salvation by works alone",
-                            council: "Carthage",
-                            heresyPoints: 1,
-                            timeLimit: 25
+                          "id": 5,
+                          "text": "Who is known as the 'Apostle to the Gentiles'?",
+                          "options": [
+                            "Peter",
+                            "Paul",
+                            "John",
+                            "James"
+                          ],
+                          "answer": "Paul",
+                          "council": "General Scripture",
+                          "heresyPoints": 0.5,
+                          "timeLimit": 30
                         }
                     ],
                     hard: [
@@ -2204,9 +2129,13 @@
             
             if (question.options) {
                 // Multiple choice format (easy mode)
+                let displayedOptions = [...question.options];
+                if (currentDifficulty === 'medium' || currentDifficulty === 'hard') {
+                    shuffleArray(displayedOptions);
+                }
                 answersHtml = `
                     <div class="options-container" style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto;">
-                        ${question.options.map((option, index) => `
+                        ${displayedOptions.map((option, index) => `
                             <button class="option-button" onclick="answerMultipleChoice('${option.replace(/'/g, "\\'")}')"
                                 style="
                                     background: linear-gradient(to bottom, #8B4513, #654321);
@@ -2537,22 +2466,44 @@
 
         // Handle agree/disagree answers (medium/hard mode)
         function answer(agrees) {
+            clearQuestionTimer();
             const question = currentQuestions[currentQuestion];
             const isHeretical = (agrees && !question.orthodox) || (!agrees && question.orthodox);
             
-            if (isHeretical) {
-                const points = question.heresyPoints || 1;
-                globalScore += points;
-                
-                if (question.council) {
-                    const wasNewCouncil = !condemnedCouncils.includes(question.council);
-                    councilScores[question.council] = (councilScores[question.council] || 0) + points;
-                    if (wasNewCouncil) {
-                        condemnedCouncils.push(question.council);
-                    }
-                    // Add or update council in sidebar
-                    addCouncilToSidebar(question.council, councilScores[question.council]);
+            let reactionMessage = '';
+            let heresyPointsToAdd = 0;
+            let orthodoxPointsToAdd = 0;
+            
+            if (question.verdictMapping) {
+                const verdict = isHeretical ? question.verdictMapping.incorrect : question.verdictMapping.correct;
+                reactionMessage = verdict.reactionMessage;
+                heresyPointsToAdd = verdict.heresyPoints || 0;
+                orthodoxPointsToAdd = verdict.orthodoxPoints || 0;
+            } else {
+                reactionMessage = getRandomQuip(isHeretical ? 'incorrect' : 'correct');
+                if (isHeretical) {
+                    heresyPointsToAdd = question.heresyPoints || 1;
                 }
+            }
+            
+            // Update scores
+            globalScore += heresyPointsToAdd;
+            orthodoxPoints += orthodoxPointsToAdd;
+            
+            // Add to council score bucket
+            if (heresyPointsToAdd > 0 && question.council) {
+                const wasNewCouncil = !condemnedCouncils.includes(question.council);
+                councilScores[question.council] = (councilScores[question.council] || 0) + heresyPointsToAdd;
+                if (wasNewCouncil) {
+                    condemnedCouncils.push(question.council);
+                }
+                // Add or update council in sidebar
+                addCouncilToSidebar(question.council, councilScores[question.council]);
+            }
+            
+            // Show reaction
+            if (reactionMessage) {
+                showReaction(reactionMessage);
             }
             
             answers.push({
@@ -2563,33 +2514,47 @@
             });
             
             currentQuestion++;
-            setTimeout(showQuestion, 300);
+            setTimeout(showQuestion, reactionMessage ? 3000 : 300);
         }
 
         // Flavor quips for each verdict tier
-        const flavorQuips = {
-            faithful: [
-                "The saints nod approvingly.",
-                "Even Aquinas is impressed — and that guy's hard to impress.",
-                "You may now safely correct others on the internet.",
-                "Augustine would hire you as his teaching assistant.",
-                "The angels are taking notes from you."
-            ],
-            borderline: [
-                "Augustine would raise an eyebrow at you.",
-                "You're basically medieval clickbait.",
-                "History may or may not remember you kindly.",
-                "The councils are... concerned.",
-                "You're one theological slip away from trouble."
-            ],
-            doomed: [
-                "Congratulations, you've offended everyone from Nicaea to Reddit.",
-                "Even Arius is shaking his head.",
-                "Don't worry — history will turn you into a meme.",
-                "The pyre is being prepared as we speak.",
-                "You've achieved peak heresy. Impressive, in a terrible way."
-            ]
-        };
+const flavorQuips = {
+    faithful: [
+        "The saints nod approvingly.",
+        "Even Aquinas is impressed — and that guy's hard to impress.",
+        "You may now safely correct others on the internet.",
+        "Augustine would hire you as his teaching assistant.",
+        "The angels are taking notes from you."
+    ],
+    borderline: [
+        "Augustine would raise an eyebrow at you.",
+        "You're basically medieval clickbait.",
+        "History may or may not remember you kindly.",
+        "The councils are... concerned.",
+        "You're one theological slip away from trouble."
+    ],
+    doomed: [
+        "Congratulations, you've offended everyone from Nicaea to Reddit.",
+        "Even Arius is shaking his head.",
+        "Don't worry — history will turn you into a meme.",
+        "The pyre is being prepared as we speak.",
+        "You've achieved peak heresy. Impressive, in a terrible way."
+    ],
+    correct: [
+        "Well done! The council approves your wisdom.",
+        "Orthodox answer! The saints rejoice.",
+        "Correct! Your theological insight shines.",
+        "Impressive! Even the bishops nod in agreement.",
+        "Spot on! Heaven's choir sings your praise."
+    ],
+    incorrect: [
+        "Heresy detected! The council frowns.",
+        "Incorrect! Whispers of error fill the hall.",
+        "Oh no! That's not quite orthodox.",
+        "The bishops disapprove of this misstep.",
+        "Alas, a theological stumble!"
+    ]
+};
         
         function getRandomQuip(category) {
             const quips = flavorQuips[category];
