@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Heretical Game - Modular Edition</title>
+    
+    <!-- CSS Components -->
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/components.css">
+    <link rel="stylesheet" href="src/css/buttons.css">
+    <link rel="stylesheet" href="src/css/verdict.css">
+    <link rel="stylesheet" href="src/css/sidebar.css">
+    <link rel="stylesheet" href="src/css/typography.css">
+    <link rel="stylesheet" href="src/css/error-handling.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="src/data/councils.json" as="fetch" type="application/json">
+    <link rel="preload" href="src/data/questions-modular.json" as="fetch" type="application/json">
+</head>
+<body>
+    <!-- Loading screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-indicator">
+                <div class="loading-dots">
+                    <span>.</span>
+                    <span>.</span>
+                    <span>.</span>
+                </div>
+                <div class="loading-text">Loading The Heretical Game...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main application will be injected here -->
+    <div id="appContainer"></div>
+
+    <!-- Error handling container -->
+    <div id="errorContainer"></div>
+
+    <!-- Performance monitor (hidden by default) -->
+    <div id="performanceMonitor" class="performance-monitor hidden">
+        <div class="performance-header">
+            <span class="performance-title">Performance</span>
+            <button class="performance-toggle" onclick="togglePerformanceMonitor()">×</button>
+        </div>
+        <div class="performance-metrics">
+            <div class="performance-metric">
+                <span class="performance-label">FPS:</span>
+                <span class="performance-value" id="fpsValue">--</span>
+            </div>
+            <div class="performance-metric">
+                <span class="performance-label">Memory:</span>
+                <span class="performance-value" id="memoryValue">--</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Module loader script -->
+    <script type="module">
+        // Show loading screen
+        window.showLoadingScreen = function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen) {
+                loadingScreen.style.display = 'flex';
+            }
+        };
+
+        // Hide loading screen
+        window.hideLoadingScreen = function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen) {
+                loadingScreen.style.display = 'none';
+            }
+        };
+
+        // Toggle performance monitor
+        window.togglePerformanceMonitor = function() {
+            const monitor = document.getElementById('performanceMonitor');
+            if (monitor) {
+                monitor.classList.toggle('hidden');
+            }
+        };
+
+        // Show error message
+        window.showError = function(message, details = null) {
+            const errorContainer = document.getElementById('errorContainer');
+            if (errorContainer) {
+                errorContainer.innerHTML = `
+                    <div class="error-notification error-error">
+                        <div class="error-icon">❌</div>
+                        <div class="error-content">
+                            <div class="error-title">Error</div>
+                            <div class="error-message">${message}</div>
+                            ${details ? `<div class="error-details">${details}</div>` : ''}
+                        </div>
+                        <button class="error-close" onclick="this.parentElement.remove()">×</button>
+                    </div>
+                `;
+            }
+        };
+
+        // Initialize application
+        async function initializeApp() {
+            try {
+                console.log('🎮 Initializing The Heretical Game (Modular Edition)...');
+                
+                // Show loading screen
+                window.showLoadingScreen();
+
+                // Dynamically import the main application module
+                const { HereticalGame } = await import('./src/js/app.js');
+                
+                // Create and initialize the game
+                window.game = new HereticalGame();
+                await window.game.init();
+
+                // Hide loading screen
+                window.hideLoadingScreen();
+
+                console.log('✅ The Heretical Game initialized successfully!');
+
+            } catch (error) {
+                console.error('❌ Failed to initialize The Heretical Game:', error);
+                window.hideLoadingScreen();
+                window.showError(
+                    'Failed to load the game. Please refresh the page and try again.',
+                    error.message
+                );
+            }
+        }
+
+        // Start initialization when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            initializeApp();
+        }
+
+        // Handle unhandled errors
+        window.addEventListener('error', (event) => {
+            console.error('Global error:', event.error);
+            window.showError(
+                'An unexpected error occurred.',
+                event.error?.message || 'Unknown error'
+            );
+        });
+
+        // Handle unhandled promise rejections
+        window.addEventListener('unhandledrejection', (event) => {
+            console.error('Unhandled promise rejection:', event.reason);
+            window.showError(
+                'A promise was rejected.',
+                event.reason?.message || 'Unknown rejection'
+            );
+        });
+    </script>
+
+    <!-- Fallback for browsers without ES6 module support -->
+    <noscript>
+        <div class="error-container">
+            <h1>JavaScript Required</h1>
+            <p>The Heretical Game requires JavaScript to run. Please enable JavaScript in your browser settings.</p>
+        </div>
+    </noscript>
+</body>
+</html>

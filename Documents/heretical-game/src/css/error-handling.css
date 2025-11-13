@@ -1,0 +1,385 @@
+/**
+ * The Heretical Game - Error Handling & Performance Styles
+ * Styles for error notifications, performance indicators, and debugging tools
+ */
+
+/* Error Notifications */
+.error-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--parchment-light);
+  border: 2px solid var(--primary-brown);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  max-width: 400px;
+  z-index: 1000;
+  animation: slideInRight 0.3s ease-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.error-notification.error-fatal {
+  border-color: #dc3545;
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+}
+
+.error-notification.error-error {
+  border-color: #fd7e14;
+  background: linear-gradient(135deg, #fd7e14, #e5620a);
+  color: white;
+}
+
+.error-notification.error-warning {
+  border-color: #ffc107;
+  background: linear-gradient(135deg, #ffc107, #e0a800);
+  color: #212529;
+}
+
+.error-notification.error-info {
+  border-color: #17a2b8;
+  background: linear-gradient(135deg, #17a2b8, #138496);
+  color: white;
+}
+
+.error-icon {
+  font-size: 1.5em;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.error-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.error-title {
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+  font-size: 0.9em;
+}
+
+.error-message {
+  font-size: 0.85em;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.error-close {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  color: inherit;
+}
+
+.error-close:hover {
+  opacity: 1;
+}
+
+/* Performance Monitor */
+.performance-monitor {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-family: 'Courier New', monospace;
+  font-size: 0.75em;
+  z-index: 999;
+  min-width: 200px;
+}
+
+.performance-monitor.collapsed {
+  min-width: auto;
+  padding: var(--spacing-xs);
+}
+
+.performance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xs);
+  cursor: pointer;
+}
+
+.performance-title {
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+.performance-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 0;
+  margin: 0;
+}
+
+.performance-metrics {
+  display: grid;
+  gap: 2px;
+}
+
+.performance-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0;
+}
+
+.performance-label {
+  opacity: 0.8;
+}
+
+.performance-value {
+  font-weight: 600;
+}
+
+.performance-value.good {
+  color: #28a745;
+}
+
+.performance-value.warning {
+  color: #ffc107;
+}
+
+.performance-value.bad {
+  color: #dc3545;
+}
+
+/* Loading Indicators */
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  text-align: center;
+}
+
+.loading-dots {
+  display: flex;
+  gap: 4px;
+  margin-bottom: var(--spacing-md);
+}
+
+.loading-dots span {
+  width: 8px;
+  height: 8px;
+  background: var(--primary-brown);
+  border-radius: 50%;
+  animation: loadingDot 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes loadingDot {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+.loading-text {
+  font-style: italic;
+  color: var(--secondary-brown);
+}
+
+/* Progress Bar */
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--parchment-dark);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  margin: var(--spacing-sm) 0;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-brown), var(--secondary-brown));
+  transition: width 0.3s ease;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Error Container */
+.error-container {
+  max-width: 600px;
+  margin: var(--spacing-xxl) auto;
+  text-align: center;
+  padding: var(--spacing-xxl);
+}
+
+.error-container h1 {
+  color: var(--primary-brown);
+  margin-bottom: var(--spacing-md);
+}
+
+.error-container p {
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+}
+
+.error-container button {
+  margin-top: var(--spacing-md);
+}
+
+/* Debug Panel */
+.debug-panel {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  font-family: 'Courier New', monospace;
+  font-size: 0.8em;
+  z-index: 1001;
+  max-width: 400px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.debug-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+  border-bottom: 1px solid #444;
+  padding-bottom: var(--spacing-xs);
+}
+
+.debug-title {
+  font-weight: 600;
+}
+
+.debug-close {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.debug-content {
+  line-height: 1.4;
+}
+
+.debug-section {
+  margin-bottom: var(--spacing-sm);
+}
+
+.debug-section h4 {
+  color: var(--parchment-light);
+  margin-bottom: var(--spacing-xs);
+  font-size: 0.9em;
+}
+
+.debug-log {
+  background: #1a1a1a;
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.85em;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.debug-log-entry {
+  margin-bottom: 2px;
+  padding: 2px 0;
+}
+
+.debug-log-entry.error {
+  color: #dc3545;
+}
+
+.debug-log-entry.warn {
+  color: #ffc107;
+}
+
+.debug-log-entry.info {
+  color: #17a2b8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .error-notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+  
+  .performance-monitor {
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    min-width: auto;
+  }
+  
+  .debug-panel {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    max-width: none;
+  }
+}
+
+/* Animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Utility Classes */
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  display: block !important;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.fade-out {
+  animation: fadeIn 0.3s ease-in-out reverse;
+}

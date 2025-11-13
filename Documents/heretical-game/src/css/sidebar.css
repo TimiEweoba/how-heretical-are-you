@@ -1,0 +1,255 @@
+/**
+ * The Heretical Game - Council Sidebar Styles
+ * Council tracking and sidebar components
+ */
+
+/* Council Sidebar */
+.council-sidebar {
+  position: fixed;
+  right: -350px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  background: linear-gradient(135deg, #3E2723 0%, var(--dark-brown) 100%);
+  border: 3px solid var(--primary-brown);
+  border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+  transition: right 0.5s ease-in-out;
+  z-index: 1000;
+  max-height: 80vh;
+  overflow-y: auto;
+  display: none; /* Hidden by default */
+}
+
+.council-sidebar.visible {
+  right: 0;
+  display: block; /* Show when visible class is added */
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--primary-brown);
+  cursor: pointer;
+}
+
+.sidebar-header h3 {
+  font-family: var(--font-primary);
+  color: var(--parchment-light);
+  font-size: 1.3em;
+  margin: var(--spacing-xs) 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar-icon {
+  font-size: 1.5em;
+  display: block;
+  margin-bottom: var(--spacing-xs);
+}
+
+.council-count {
+  display: none;
+  background: var(--error-red);
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.7em;
+  margin-left: var(--spacing-xs);
+}
+
+/* Council List */
+.council-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.council-item {
+  background: rgba(245, 222, 179, 0.15);
+  border: 2px solid #A0522D;
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-md);
+  color: var(--parchment-light);
+  font-family: var(--font-primary);
+  font-size: 0.9em;
+  animation: slideInCouncil 0.5s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.council-item::before {
+  content: '⚠️';
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2em;
+}
+
+.council-item-name {
+  font-weight: bold;
+  color: var(--gold);
+  margin-left: 20px;
+  display: block;
+}
+
+.council-item-count {
+  font-size: 0.8em;
+  color: #FF6B6B;
+  margin-left: 20px;
+  margin-top: var(--spacing-xs);
+  display: block;
+}
+
+@keyframes slideInCouncil {
+  from { 
+    opacity: 0; 
+    transform: translateX(50px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0);
+  }
+}
+
+/* Scrollbar Styling */
+.council-sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.council-sidebar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.council-sidebar::-webkit-scrollbar-thumb {
+  background: var(--primary-brown);
+  border-radius: 10px;
+}
+
+.council-sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-brown);
+}
+
+/* Mobile FAB (Floating Action Button) */
+.council-fab {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  display: none; /* toggled by .show */
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: rgba(93, 64, 55, 0.95);
+  color: var(--parchment-light);
+  border: 2px solid var(--primary-brown);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 0.85em;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  z-index: 1100;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.council-fab .icon { 
+  font-size: 1.1em; 
+}
+
+.council-fab .count {
+  background: var(--error-red);
+  color: white;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.council-fab.show { 
+  display: flex;
+  transform: translateX(-50%) translateY(0);
+}
+
+.council-fab.unread {
+  animation: fabPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes fabPulse {
+  0%, 100% { box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+  50% { box-shadow: 0 6px 16px rgba(220,20,60,0.5); }
+}
+
+/* Mobile Sidebar Header */
+.sidebar-toggle-hint {
+  font-size: 0.7em;
+  opacity: 0.8;
+  display: block;
+  color: var(--parchment-light);
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .council-sidebar {
+    /* Mobile: Bottom overlay instead of side */
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    max-height: 40vh;
+    font-size: 0.8em;
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    display: none; /* Hidden by default on mobile too */
+  }
+  
+  .council-sidebar.visible {
+    transform: translateY(0);
+    right: 0;
+    display: block; /* Show when visible */
+  }
+  
+  .sidebar-header {
+    padding: var(--spacing-xs) var(--spacing-md) !important;
+    background: rgba(139, 69, 19, 0.95) !important;
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .council-list {
+    max-height: 120px !important;
+    padding: var(--spacing-xs) var(--spacing-sm) !important;
+  }
+  
+  .council-item {
+    padding: var(--spacing-xs) var(--spacing-sm) !important;
+    margin: var(--spacing-xs) 0 !important;
+    font-size: 0.75em !important;
+    border-radius: var(--border-radius-sm);
+  }
+}
+
+/* Compact council list for mobile */
+@media (max-width: 480px) {
+  .council-sidebar {
+    height: 150px;
+    max-height: 35vh;
+  }
+  
+  .council-list {
+    max-height: 100px !important;
+  }
+  
+  .council-item {
+    font-size: 0.7em !important;
+  }
+}

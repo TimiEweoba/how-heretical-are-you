@@ -1,0 +1,156 @@
+/**
+ * The Heretical Game - Main Styles
+ * Base styles, variables, and global definitions
+ */
+
+/* CSS Variables for theming */
+:root {
+  /* Colors */
+  --primary-brown: #8B4513;
+  --secondary-brown: #A0522D;
+  --dark-brown: #5D4037;
+  --light-brown: #A0826D;
+  --parchment-light: #F4E8D0;
+  --parchment-dark: #E8D7B3;
+  --text-primary: #5D4037;
+  --text-secondary: #6D4C41;
+  --success-green: #2E7D32;
+  --warning-orange: #F57C00;
+  --error-red: #DC143C;
+  --gold: #FFD700;
+  
+  /* Typography */
+  --font-primary: 'Cinzel', serif;
+  --font-display: 'Uncial Antiqua', cursive;
+  --font-size-base: 16px;
+  --font-size-lg: 1.2em;
+  --font-size-xl: 1.5em;
+  --font-size-xxl: 2.5em;
+  
+  /* Spacing */
+  --spacing-xs: 5px;
+  --spacing-sm: 10px;
+  --spacing-md: 15px;
+  --spacing-lg: 20px;
+  --spacing-xl: 30px;
+  --spacing-xxl: 40px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 8px rgba(0,0,0,0.3);
+  --shadow-lg: 0 6px 12px rgba(0,0,0,0.4);
+  --shadow-xl: 0 10px 40px rgba(0,0,0,0.5);
+  
+  /* Borders */
+  --border-radius-sm: 3px;
+  --border-radius-md: 5px;
+  --border-radius-lg: 8px;
+  --border-radius-xl: 15px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  background: linear-gradient(135deg, #8B7355 0%, #A0826D 50%, #8B7355 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background texture */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(139, 69, 19, 0.1) 35px, rgba(139, 69, 19, 0.1) 70px),
+    repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(160, 82, 45, 0.05) 35px, rgba(160, 82, 45, 0.05) 70px);
+  pointer-events: none;
+}
+
+/* Utility classes */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  display: block !important;
+}
+
+/* Container and layout */
+.container {
+  width: 90%;
+  max-width: 600px;
+  z-index: 1;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  :root {
+    --font-size-base: 14px;
+    --spacing-lg: 15px;
+    --spacing-xl: 20px;
+  }
+  
+  .container {
+    width: 95%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-size-base: 12px;
+  }
+}

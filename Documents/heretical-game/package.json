@@ -1,0 +1,62 @@
+{
+  "name": "the-heretical-game",
+  "version": "2.0.0",
+  "description": "A modular medieval theological quiz game with comprehensive error handling and performance optimization",
+  "main": "src/js/app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node tests/test-modules.js",
+    "test:browser": "open tests/test-runner.html",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix",
+    "typecheck": "tsc --noEmit",
+    "serve": "http-server dist -p 8080 -c-1",
+    "deploy": "npm run build && npm run deploy:vercel",
+    "deploy:vercel": "vercel --prod",
+    "deploy:netlify": "netlify deploy --prod",
+    "analyze": "vite-bundle-analyzer dist",
+    "performance": "lighthouse http://localhost:8080 --output=html --output-path=performance-report.html"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vite": "^4.4.0",
+    "eslint": "^8.45.0",
+    "typescript": "^5.1.6",
+    "http-server": "^14.1.1",
+    "vite-bundle-analyzer": "^0.7.0",
+    "lighthouse": "^10.4.0"
+  },
+  "keywords": [
+    "game",
+    "medieval",
+    "theological",
+    "quiz",
+    "modular",
+    "es6",
+    "performance",
+    "security"
+  ],
+  "author": "The Heretical Game Development Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/the-heretical-game.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/the-heretical-game/issues"
+  },
+  "homepage": "https://the-heretical-game.vercel.app",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}

@@ -1,0 +1,240 @@
+/**
+ * The Heretical Game - Typography Styles
+ * Headings, text, and font-related styles
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Uncial+Antiqua&display=swap');
+
+/* Typography Scale */
+.text-xs { font-size: 0.75em; }
+.text-sm { font-size: 0.875em; }
+.text-base { font-size: 1em; }
+.text-lg { font-size: 1.125em; }
+.text-xl { font-size: 1.25em; }
+.text-2xl { font-size: 1.5em; }
+.text-3xl { font-size: 1.875em; }
+.text-4xl { font-size: 2.25em; }
+.text-5xl { font-size: 3em; }
+
+/* Font Weights */
+.font-normal { font-weight: 400; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+/* Text Alignment */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* Text Colors */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-brown { color: var(--primary-brown); }
+.text-gold { color: var(--gold); }
+.text-success { color: var(--success-green); }
+.text-warning { color: var(--warning-orange); }
+.text-error { color: var(--error-red); }
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: var(--font-size-xxl);
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  margin-bottom: var(--spacing-lg);
+}
+
+h2 {
+  font-size: 2.2em;
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+h3 {
+  font-size: 1.5em;
+  margin-bottom: var(--spacing-md);
+}
+
+/* Subtitle */
+.subtitle {
+  font-size: var(--font-size-lg);
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+  font-style: italic;
+}
+
+/* Start Text */
+.start-text {
+  text-align: center;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Council Text Styles */
+.council-text {
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.council-name {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Medieval-style Text */
+.medieval-text {
+  font-family: var(--font-primary);
+  font-style: italic;
+  color: var(--primary-brown);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Loading Text */
+.loading-text {
+  font-family: var(--font-primary);
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--primary-brown);
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+
+/* Verdict Text */
+.verdict-text {
+  font-family: var(--font-primary);
+  font-size: 1.3em;
+  color: var(--text-primary);
+  text-align: center;
+  line-height: 1.8;
+  margin: var(--spacing-lg) 0;
+}
+
+/* Flavor Quip */
+.flavor-quip {
+  text-align: center;
+  font-family: var(--font-primary);
+  font-size: 1.1em;
+  color: var(--primary-brown);
+  margin: var(--spacing-lg) 0;
+  padding: var(--spacing-md);
+  background: rgba(139, 69, 19, 0.1);
+  border-left: 3px solid var(--primary-brown);
+  border-right: 3px solid var(--primary-brown);
+  font-style: italic;
+}
+
+/* Score Summary */
+.score-summary {
+  text-align: center;
+  font-family: var(--font-primary);
+  font-size: 1em;
+  color: var(--text-primary);
+  margin: var(--spacing-xl) 0;
+  line-height: 1.6;
+}
+
+/* Progress Text */
+.progress-text {
+  font-size: 0.9em;
+  color: var(--primary-brown);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Medieval Language Styling */
+.medieval-language {
+  font-style: italic;
+  color: var(--primary-brown);
+  font-weight: 600;
+}
+
+.thou-text {
+  font-family: var(--font-display);
+  color: var(--dark-brown);
+  font-weight: 600;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.8em;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 1.5em;
+  }
+  
+  .subtitle {
+    font-size: 1em;
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .start-text {
+    font-size: 0.95em;
+    line-height: 1.4;
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .verdict-text {
+    font-size: 1em;
+    line-height: 1.5;
+    margin: var(--spacing-lg) 0;
+  }
+  
+  .flavor-quip {
+    font-size: 0.9em;
+    padding: var(--spacing-sm);
+    margin: var(--spacing-lg) 0;
+  }
+  
+  .score-summary {
+    font-size: 0.85em;
+    margin: var(--spacing-xl) 0;
+    line-height: 1.4;
+  }
+  
+  .loading-text {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.6em;
+  }
+  
+  h2 {
+    font-size: 1.3em;
+  }
+  
+  .verdict-text {
+    font-size: 0.9em;
+  }
+  
+  .flavor-quip {
+    font-size: 0.85em;
+  }
+  
+  .score-summary {
+    font-size: 0.8em;
+  }
+  
+  .loading-text {
+    font-size: 1.2em;
+  }
+}

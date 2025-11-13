@@ -1,0 +1,223 @@
+/**
+ * The Heretical Game - Button Styles
+ * All button variations and interactive elements
+ */
+
+/* Base Button */
+.button {
+  background: linear-gradient(to bottom, var(--primary-brown), #654321);
+  color: var(--parchment-light);
+  border: 2px solid var(--dark-brown);
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: 1.1em;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-medium);
+  display: block;
+  margin: 0 auto;
+}
+
+.button:hover {
+  background: linear-gradient(to bottom, var(--secondary-brown), var(--primary-brown));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.button-group .button {
+  margin: 0;
+}
+
+/* Difficulty-specific Buttons */
+.button.difficulty-easy {
+  background: linear-gradient(to bottom, var(--success-green), #1B5E20);
+  border-color: #1B5E20;
+}
+
+.button.difficulty-easy:hover {
+  background: linear-gradient(to bottom, #388E3C, var(--success-green));
+}
+
+.button.difficulty-medium {
+  background: linear-gradient(to bottom, var(--warning-orange), #E65100);
+  border-color: #E65100;
+}
+
+.button.difficulty-medium:hover {
+  background: linear-gradient(to bottom, #FF8F00, var(--warning-orange));
+}
+
+.button.difficulty-hard {
+  background: linear-gradient(to bottom, var(--error-red), #8B0000);
+  border-color: #8B0000;
+}
+
+.button.difficulty-hard:hover {
+  background: linear-gradient(to bottom, #FF1744, var(--error-red));
+}
+
+/* Answer Buttons */
+.answer-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xl);
+}
+
+.answer-button {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--primary-brown), #654321);
+  border: 3px solid var(--dark-brown);
+  color: var(--parchment-light);
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-medium);
+  box-shadow: 
+    inset -2px -2px 8px rgba(0,0,0,0.4),
+    0 4px 8px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.answer-button::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, transparent 40%, rgba(255,255,255,0.1) 50%);
+}
+
+.answer-button:hover,
+.answer-button:active {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 
+    inset -3px -3px 10px rgba(0,0,0,0.5),
+    0 6px 12px rgba(0,0,0,0.4);
+}
+
+.answer-button.agree {
+  background: radial-gradient(circle at 30% 30%, var(--success-green), #1B5E20);
+}
+
+.answer-button.disagree {
+  background: radial-gradient(circle at 30% 30%, var(--error-red), #8B0000);
+}
+
+/* Option Buttons (for multiple choice) */
+.option-button {
+  background: linear-gradient(to bottom, var(--primary-brown), #654321);
+  color: var(--parchment-light);
+  border: 2px solid var(--dark-brown);
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: 0.95em;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-medium);
+  text-align: center;
+  width: 100%;
+  line-height: 1.3;
+}
+
+.option-button:hover {
+  background: linear-gradient(to bottom, var(--secondary-brown), var(--primary-brown));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Touch feedback for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .answer-button:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+  
+  .button:active,
+  .option-button:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .answer-buttons {
+    gap: var(--spacing-lg);
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .answer-button {
+    width: 90px;
+    height: 90px;
+    font-size: 0.85em;
+    margin: var(--spacing-xs);
+  }
+  
+  .button-group {
+    gap: var(--spacing-md);
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .button {
+    width: 100%;
+    max-width: 280px;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: 1em;
+  }
+  
+  .options-container {
+    max-width: 100% !important;
+    gap: var(--spacing-sm) !important;
+  }
+  
+  .option-button {
+    padding: var(--spacing-sm) var(--spacing-md) !important;
+    font-size: 0.9em !important;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .answer-button {
+    width: 80px;
+    height: 80px;
+    font-size: 0.8em;
+  }
+  
+  .button {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}

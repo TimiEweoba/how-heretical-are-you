@@ -1,0 +1,343 @@
+/**
+ * The Heretical Game - Verdict and Animation Styles
+ * Verdict screens, animations, and special effects
+ */
+
+/* Verdict Container */
+.verdict-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-lg);
+  transition: background 1s ease;
+}
+
+/* Verdict Types */
+.verdict-faithful {
+  background: radial-gradient(circle, #FFF9E6 0%, #F5DEB3 50%, #DEB887 100%);
+  animation: goldenGlow 3s ease-in-out infinite alternate;
+}
+
+.verdict-borderline {
+  background: radial-gradient(circle, #F4E8D0 0%, #D2B48C 50%, #8B7355 100%);
+  animation: flickerCandle 2s ease-in-out infinite;
+}
+
+.verdict-doomed {
+  background: radial-gradient(circle, #8B0000 0%, var(--error-red) 40%, #FF6347 100%);
+  animation: burningFlames 2s ease-in-out infinite alternate;
+}
+
+/* Verdict Animations */
+@keyframes goldenGlow {
+  0% { filter: brightness(1); }
+  100% { filter: brightness(1.15); }
+}
+
+@keyframes flickerCandle {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(0.9); }
+}
+
+@keyframes burningFlames {
+  0% { filter: brightness(1) hue-rotate(0deg); }
+  100% { filter: brightness(1.2) hue-rotate(10deg); }
+}
+
+/* Verdict Header */
+.verdict-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.verdict-icon {
+  font-size: 4em;
+  margin-bottom: var(--spacing-md);
+  animation: iconBounce 1s ease-out 1s;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.verdict-title-main {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xxl);
+  font-weight: bold;
+  color: var(--text-primary);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: titleReveal 1s ease-out 1.2s both;
+}
+
+@keyframes titleReveal {
+  0% {
+    opacity: 0;
+    letter-spacing: -10px;
+  }
+  100% {
+    opacity: 1;
+    letter-spacing: normal;
+  }
+}
+
+/* Verdict Content */
+.verdict-text {
+  font-family: var(--font-primary);
+  font-size: 1.3em;
+  color: var(--text-primary);
+  text-align: center;
+  line-height: 1.8;
+  margin: var(--spacing-lg) 0;
+}
+
+.verdict-level {
+  font-size: 1.8em;
+  text-align: center;
+  margin: var(--spacing-lg) 0;
+  font-weight: 600;
+}
+
+.verdict-level.innocent { color: var(--success-green); }
+.verdict-level.suspicious { color: var(--warning-orange); }
+.verdict-level.heretic { color: var(--error-red); }
+
+/* Flavor Quip */
+.flavor-quip {
+  text-align: center;
+  font-family: var(--font-primary);
+  font-size: 1.1em;
+  color: var(--primary-brown);
+  margin: var(--spacing-lg) 0;
+  padding: var(--spacing-md);
+  background: rgba(139, 69, 19, 0.1);
+  border-left: 3px solid var(--primary-brown);
+  border-right: 3px solid var(--primary-brown);
+  font-style: italic;
+}
+
+/* Verdict Badge */
+.verdict-badge {
+  text-align: center;
+  font-family: var(--font-primary);
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--gold);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: var(--spacing-lg) 0;
+  padding: var(--spacing-md);
+  background: rgba(139, 69, 19, 0.3);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--primary-brown);
+}
+
+/* Score Summary */
+.score-summary {
+  text-align: center;
+  font-family: var(--font-primary);
+  font-size: 1em;
+  color: var(--text-primary);
+  margin: var(--spacing-xl) 0;
+  line-height: 1.6;
+}
+
+/* Council Verdict */
+.council-verdict {
+  margin: var(--spacing-xl) 0;
+  padding: var(--spacing-lg);
+  background: rgba(139, 69, 19, 0.15);
+  border: 2px solid var(--primary-brown);
+  border-radius: var(--border-radius-lg);
+}
+
+.council-name {
+  font-family: var(--font-primary);
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--primary-brown);
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.council-text {
+  font-family: var(--font-primary);
+  font-size: 1em;
+  color: var(--text-primary);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Social Sharing */
+.social-sharing {
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background: rgba(139, 69, 19, 0.1);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--primary-brown);
+}
+
+.share-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.share-button {
+  background: var(--primary-brown);
+  color: white;
+  border: none;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: all var(--transition-medium);
+}
+
+.share-button:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+/* Suspense Sequence */
+.suspense-container {
+  text-align: center;
+  padding: var(--spacing-xxl) var(--spacing-lg);
+  animation: fadeIn 0.8s ease-in;
+}
+
+.suspense-icon {
+  font-size: 4em;
+  margin-bottom: var(--spacing-lg);
+  animation: pulse 2s infinite;
+}
+
+.suspense-text {
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin: var(--spacing-xl) 0;
+  font-style: italic;
+  color: var(--primary-brown);
+}
+
+.loading-dots {
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--primary-brown);
+  letter-spacing: 0.2em;
+}
+
+.loading-dots span {
+  display: inline-block;
+  animation: dotPulse 1.5s infinite;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: 0s; }
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotPulse {
+  0%, 80%, 100% { opacity: 0; }
+  40% { opacity: 1; }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .verdict-container {
+    padding: var(--spacing-md);
+    min-height: 100vh;
+  }
+  
+  .verdict-icon {
+    font-size: 2.5em;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .verdict-title-main {
+    font-size: 1.8em;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .verdict-text {
+    font-size: 1em;
+    line-height: 1.5;
+    margin: var(--spacing-lg) 0;
+  }
+  
+  .flavor-quip {
+    font-size: 0.9em;
+    padding: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+  }
+  
+  .verdict-badge {
+    font-size: 1.2em;
+    padding: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+  }
+  
+  .score-summary {
+    font-size: 0.85em;
+    margin: var(--spacing-xl) 0;
+    line-height: 1.4;
+  }
+  
+  .council-verdict {
+    margin: var(--spacing-xl) 0;
+    padding: var(--spacing-lg);
+  }
+  
+  .council-name {
+    font-size: 1em;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .council-text {
+    font-size: 0.9em;
+    line-height: 1.4;
+  }
+  
+  .suspense-icon {
+    font-size: 3em !important;
+    margin-bottom: var(--spacing-lg) !important;
+  }
+  
+  .suspense-text {
+    font-size: 1em !important;
+    margin: var(--spacing-xl) 0 !important;
+  }
+  
+  .loading-dots {
+    font-size: 1.5em !important;
+    margin-top: var(--spacing-xl) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .verdict-icon {
+    font-size: 2em;
+  }
+  
+  .verdict-title-main {
+    font-size: 1.5em;
+  }
+  
+  .share-buttons {
+    flex-direction: column !important;
+    gap: var(--spacing-xs) !important;
+  }
+  
+  .share-button {
+    width: 100% !important;
+    padding: var(--spacing-sm) !important;
+    font-size: 0.9em !important;
+  }
+}

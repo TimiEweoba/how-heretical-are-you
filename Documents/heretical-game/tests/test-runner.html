@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Heretical Game - Module Tests</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .test-header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .test-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .test-stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: #ecf0f1;
+            border-bottom: 1px solid #bdc3c7;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
+        
+        .test-results {
+            padding: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .test-group {
+            margin-bottom: 20px;
+            border: 1px solid #ecf0f1;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .test-group-header {
+            background: #34495e;
+            color: white;
+            padding: 10px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .test-group-header:hover {
+            background: #2c3e50;
+        }
+        
+        .test-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid #ecf0f1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .test-item:last-child {
+            border-bottom: none;
+        }
+        
+        .test-name {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .test-status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .test-pass {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .test-fail {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .test-skip {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .test-error {
+            background: #8e44ad;
+            color: white;
+            padding: 8px 15px;
+            margin-top: 5px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+        
+        .controls {
+            padding: 20px;
+            background: #ecf0f1;
+            text-align: center;
+            border-top: 1px solid #bdc3c7;
+        }
+        
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 0 5px;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        .btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #ecf0f1;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #3498db;
+            transition: width 0.3s ease;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .collapsible {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .collapsible.expanded {
+            max-height: 1000px;
+        }
+        
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1>🎮 The Heretical Game - Module Test Suite</h1>
+            <p>Comprehensive testing for the modular architecture</p>
+        </div>
+        
+        <div class="test-stats">
+            <div class="stat-item">
+                <div class="stat-number" id="totalTests">0</div>
+                <div class="stat-label">Total Tests</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="passedTests">0</div>
+                <div class="stat-label">Passed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="failedTests">0</div>
+                <div class="stat-label">Failed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="testDuration">0s</div>
+                <div class="stat-label">Duration</div>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+        </div>
+        
+        <div id="testResults" class="test-results">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading test modules...</p>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" id="runTestsBtn" onclick="runAllTests()">Run All Tests</button>
+            <button class="btn" id="runUnitTestsBtn" onclick="runUnitTests()">Unit Tests Only</button>
+            <button class="btn" id="runIntegrationTestsBtn" onclick="runIntegrationTests()">Integration Tests Only</button>
+            <button class="btn" id="exportResultsBtn" onclick="exportResults()">Export Results</button>
+        </div>
+    </div>
+
+    <script type="module">
+        // Test framework
+        class AdvancedTestRunner {
+            constructor() {
+                this.testGroups = new Map();
+                this.results = [];
+                this.currentTest = null;
+                this.startTime = null;
+                this.testModules = new Map();
+            }
+
+            addTestGroup(name, tests) {
+                this.testGroups.set(name, tests);
+            }
+
+            async runAll() {
+                this.startTime = Date.now();
+                this.results = [];
+                
+                updateUI({ status: 'running', progress: 0 });
+                
+                const totalTests = Array.from(this.testGroups.values())
+                    .reduce((sum, group) => sum + group.length, 0);
+                
+                let completedTests = 0;
+                
+                for (const [groupName, tests] of this.testGroups) {
+                    const groupResults = [];
+                    
+                    for (const test of tests) {
+                        this.currentTest = test;
+                        const result = await this.runTest(test);
+                        groupResults.push(result);
+                        this.results.push(result);
+                        
+                        completedTests++;
+                        const progress = (completedTests / totalTests) * 100;
+                        updateUI({ progress, currentTest: test.name });
+                        
+                        // Small delay to prevent UI blocking
+                        await new Promise(resolve => setTimeout(resolve, 10));
+                    }
+                    
+                    displayGroupResults(groupName, groupResults);
+                }
+                
+                const duration = (Date.now() - this.startTime) / 1000;
+                updateUI({ status: 'completed', duration });
+                
+                return this.results;
+            }
+
+            async runTest(test) {
+                try {
+                    const startTime = performance.now();
+                    await test.testFunction();
+                    const duration = performance.now() - startTime;
+                    
+                    return {
+                        name: test.name,
+                        passed: true,
+                        duration,
+                        timestamp: Date.now()
+                    };
+                } catch (error) {
+                    return {
+                        name: test.name,
+                        passed: false,
+                        error: error.message,
+                        stack: error.stack,
+                        duration: performance.now() - startTime,
+                        timestamp: Date.now()
+                    };
+                }
+            }
+
+            getResults() {
+                return {
+                    summary: {
+                        total: this.results.length,
+                        passed: this.results.filter(r => r.passed).length,
+                        failed: this.results.filter(r => !r.passed).length,
+                        duration: this.startTime ? (Date.now() - this.startTime) / 1000 : 0
+                    },
+                    results: this.results,
+                    timestamp: Date.now()
+                };
+            }
+        }
+
+        // UI functions
+        function updateUI(data) {
+            if (data.progress !== undefined) {
+                document.getElementById('progressBar').style.width = `${data.progress}%`;
+            }
+            
+            if (data.status === 'running') {
+                document.getElementById('testResults').innerHTML = '<div class="loading"><div class="spinner"></div><p>Running tests...</p></div>';
+            }
+            
+            if (data.currentTest) {
+                document.querySelector('.loading p').textContent = `Running: ${data.currentTest}`;
+            }
+            
+            if (data.status === 'completed') {
+                const results = window.testRunner.getResults();
+                const summary = results.summary;
+                
+                document.getElementById('totalTests').textContent = summary.total;
+                document.getElementById('passedTests').textContent = summary.passed;
+                document.getElementById('failedTests').textContent = summary.failed;
+                document.getElementById('testDuration').textContent = `${summary.duration.toFixed(1)}s`;
+            }
+            
+            if (data.duration) {
+                document.getElementById('testDuration').textContent = `${data.duration.toFixed(1)}s`;
+            }
+        }
+
+        function displayGroupResults(groupName, groupResults) {
+            const container = document.getElementById('testResults');
+            
+            if (container.querySelector('.loading')) {
+                container.innerHTML = '';
+            }
+            
+            const groupDiv = document.createElement('div');
+            groupDiv.className = 'test-group';
+            
+            const passedCount = groupResults.filter(r => r.passed).length;
+            const totalCount = groupResults.length;
+            
+            const header = document.createElement('div');
+            header.className = 'test-group-header';
+            header.innerHTML = `
+                <span>${groupName}</span>
+                <span>${passedCount}/${totalCount} passed</span>
+                <span class="toggle-icon">▼</span>
+            `;
+            
+            const content = document.createElement('div');
+            content.className = 'collapsible expanded';
+            
+            groupResults.forEach(result => {
+                const testDiv = document.createElement('div');
+                testDiv.className = 'test-item';
+                testDiv.innerHTML = `
+                    <span class="test-name">${result.name}</span>
+                    <span class="test-status ${result.passed ? 'test-pass' : 'test-fail'}">
+                        ${result.passed ? 'PASS' : 'FAIL'}
+                    </span>
+                `;
+                
+                if (!result.passed && result.error) {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'test-error';
+                    errorDiv.textContent = result.error;
+                    testDiv.appendChild(errorDiv);
+                }
+                
+                content.appendChild(testDiv);
+            });
+            
+            groupDiv.appendChild(header);
+            groupDiv.appendChild(content);
+            container.appendChild(groupDiv);
+            
+            // Add toggle functionality
+            header.addEventListener('click', () => {
+                content.classList.toggle('expanded');
+                header.querySelector('.toggle-icon').classList.toggle('rotated');
+            });
+        }
+
+        // Test functions
+        async function runAllTests() {
+            if (!window.testRunner) {
+                await initializeTestRunner();
+            }
+            
+            disableButtons(true);
+            await window.testRunner.runAll();
+            disableButtons(false);
+        }
+
+        async function runUnitTests() {
+            // Filter for unit tests only
+            console.log('Running unit tests...');
+            await runAllTests(); // For now, run all tests
+        }
+
+        async function runIntegrationTests() {
+            // Filter for integration tests only
+            console.log('Running integration tests...');
+            await runAllTests(); // For now, run all tests
+        }
+
+        function exportResults() {
+            if (!window.testRunner) {
+                alert('No test results to export. Please run tests first.');
+                return;
+            }
+            
+            const results = window.testRunner.getResults();
+            const dataStr = JSON.stringify(results, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `test-results-${new Date().toISOString().slice(0, 19).replace(/:/g, '-')}.json`;
+            link.click();
+        }
+
+        function disableButtons(disabled) {
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.disabled = disabled;
+            });
+        }
+
+        // Initialize test runner with comprehensive tests
+        async function initializeTestRunner() {
+            try {
+                // Import test modules
+                const { runTests } = await import('../test-modules.js');
+                const { createTests } = await import('../test-modules.js');
+                
+                const runner = new AdvancedTestRunner();
+                
+                // Create and add test groups
+                const testRunner = createTests();
+                
+                // Group tests by category
+                const unitTests = [];
+                const integrationTests = [];
+                const securityTests = [];
+                const performanceTests = [];
+                
+                // Categorize tests (this would be done in the actual test file)
+                // For now, we'll create some sample tests
+                
+                // Unit Tests
+                unitTests.push(
+                    {
+                        name: 'HTML Sanitization',
+                        testFunction: () => {
+                            const malicious = '<script>alert("xss")</script>';
+                            const sanitized = templates.sanitizeHTML(malicious);
+                            if (sanitized.includes('<script>')) {
+                                throw new Error('HTML sanitization failed');
+                            }
+                        }
+                    },
+                    {
+                        name: 'Template Button Creation',
+                        testFunction: () => {
+                            const buttonHTML = templates.createButton({
+                                text: 'Test Button',
+                                onClick: 'testFunction()'
+                            });
+                            
+                            if (!buttonHTML.includes('Test Button') || !buttonHTML.includes('testFunction()')) {
+                                throw new Error('Button template creation failed');
+                            }
+                        }
+                    }
+                );
+                
+                // Integration Tests
+                integrationTests.push(
+                    {
+                        name: 'Game Engine Initialization',
+                        testFunction: async () => {
+                            const { GameEngine } = await import('../src/js/modules/game-engine.js');
+                            const engine = new GameEngine({
+                                debug: false,
+                                enablePerformanceMonitoring: false,
+                                enableErrorHandling: false
+                            });
+                            
+                            await new Promise(resolve => {
+                                engine.on('initialized', resolve);
+                            });
+                            
+                            if (!engine.isInitialized) {
+                                throw new Error('Game engine failed to initialize');
+                            }
+                            
+                            engine.destroy();
+                        }
+                    }
+                );
+                
+                // Security Tests
+                securityTests.push(
+                    {
+                        name: 'XSS Protection in Templates',
+                        testFunction: () => {
+                            const maliciousInputs = [
+                                '<script>alert("xss")</script>',
+                                'javascript:alert("xss")',
+                                '<img src="x" onerror="alert(\'xss\')">',
+                                '<svg onload="alert(\'xss\')">'
+                            ];
+                            
+                            for (const input of maliciousInputs) {
+                                const sanitized = templates.sanitizeHTML(input);
+                                
+                                if (sanitized.includes('<script>') || 
+                                    sanitized.includes('javascript:') ||
+                                    sanitized.includes('onerror=') ||
+                                    sanitized.includes('onload=')) {
+                                    throw new Error(`XSS protection failed for: ${input}`);
+                                }
+                            }
+                        }
+                    }
+                );
+                
+                // Performance Tests
+                performanceTests.push(
+                    {
+                        name: 'Template Rendering Performance',
+                        testFunction: () => {
+                            const startTime = performance.now();
+                            
+                            // Render 1000 templates
+                            for (let i = 0; i < 1000; i++) {
+                                templates.createButton({
+                                    text: `Button ${i}`,
+                                    onClick: `function${i}()`
+                                });
+                            }
+                            
+                            const duration = performance.now() - startTime;
+                            
+                            if (duration > 1000) { // Should complete in under 1 second
+                                throw new Error(`Template rendering too slow: ${duration}ms`);
+                            }
+                        }
+                    }
+                );
+                
+                runner.addTestGroup('Unit Tests', unitTests);
+                runner.addTestGroup('Integration Tests', integrationTests);
+                runner.addTestGroup('Security Tests', securityTests);
+                runner.addTestGroup('Performance Tests', performanceTests);
+                
+                window.testRunner = runner;
+                
+            } catch (error) {
+                console.error('Failed to initialize test runner:', error);
+                document.getElementById('testResults').innerHTML = `
+                    <div class="test-error">
+                        Failed to initialize test runner: ${error.message}
+                        
+                        ${error.stack}
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initializeTestRunner();
+        });
+
+        // Make functions global for button onclick handlers
+        window.runAllTests = runAllTests;
+        window.runUnitTests = runUnitTests;
+        window.runIntegrationTests = runIntegrationTests;
+        window.exportResults = exportResults;
+    </script>
+</body>
+</html>

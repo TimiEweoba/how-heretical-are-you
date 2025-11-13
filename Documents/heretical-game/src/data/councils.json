@@ -1,0 +1,49 @@
+{
+  "councils": [
+    {
+      "id": "nicaea",
+      "name": "Council of Nicaea",
+      "icon": "🏛️",
+      "description": "The first ecumenical council that established the divinity of Christ",
+      "offendedMessage": "The Council of Nicaea condemns your Christological errors!",
+      "severity": "severe",
+      "tolerance": 1
+    },
+    {
+      "id": "constantinople",
+      "name": "Council of Constantinople",
+      "icon": "🏛️",
+      "description": "Refined and expanded the Nicene Creed",
+      "offendedMessage": "The Council of Constantinople is appalled by your creedal innovations!",
+      "severity": "severe",
+      "tolerance": 1
+    },
+    {
+      "id": "ephesus",
+      "name": "Council of Ephesus",
+      "icon": "🏛️",
+      "description": "Defined Mary as Theotokos (God-bearer)",
+      "offendedMessage": "The Council of Ephesus is deeply troubled by your Marian theology!",
+      "severity": "high",
+      "tolerance": 2
+    },
+    {
+      "id": "chalcedon",
+      "name": "Council of Chalcedon",
+      "icon": "🏛️",
+      "description": "Defined Christ's two natures (divine and human)",
+      "offendedMessage": "The Council of Chalcedon condemns your confusion of Christ's natures!",
+      "severity": "severe",
+      "tolerance": 1
+    },
+    {
+      "id": "trent",
+      "name": "Council of Trent",
+      "icon": "⚔️",
+      "description": "The Catholic Counter-Reformation council",
+      "offendedMessage": "The Council of Trent anathematizes your Protestant sympathies!",
+      "severity": "extreme",
+      "tolerance": 0
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+/**
+ * The Heretical Game - Component Styles
+ * Parchment, containers, and main UI components
+ */
+
+/* Parchment Component */
+.parchment {
+  background: linear-gradient(to bottom, var(--parchment-light), var(--parchment-dark));
+  border: 3px solid var(--primary-brown);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-xxl);
+  box-shadow: 
+    0 0 20px rgba(0,0,0,0.5),
+    inset 0 0 60px rgba(139, 69, 19, 0.1),
+    inset 0 0 120px rgba(139, 69, 19, 0.05);
+  position: relative;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.parchment::before,
+.parchment::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--primary-brown);
+}
+
+.parchment::before {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.parchment::after {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Parchment Scroll Component */
+.parchment-scroll {
+  background: rgba(245, 222, 179, 0.95);
+  border: 4px solid var(--primary-brown);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xxl);
+  max-width: 700px;
+  box-shadow: var(--shadow-xl);
+  animation: scrollUnfurl 1s ease-out;
+}
+
+@keyframes scrollUnfurl {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scaleY(0.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* Decorative Elements */
+.decorative-border {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--primary-brown) 20%, var(--primary-brown) 80%, transparent);
+  margin: var(--spacing-lg) 0;
+}
+
+/* Wax Seal Component */
+.wax-seal {
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle at 30% 30%, #DC143C, #8B0000);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 
+    inset -3px -3px 10px rgba(0,0,0,0.5),
+    0 4px 8px rgba(0,0,0,0.3);
+  margin: 0 auto var(--spacing-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  color: var(--gold);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Scroll Reveal Animation */
+.scroll-reveal {
+  animation: fadeInContent 1.5s ease-out 0.5s both;
+}
+
+@keyframes fadeInContent {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Question Container */
+.question-container {
+  animation: slideIn 0.5s ease-out;
+}
+
+/* Question Text */
+.question-text {
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.5;
+  padding: var(--spacing-lg);
+  background: rgba(255, 255, 255, 0.3);
+  border-left: 3px solid var(--primary-brown);
+  border-right: 3px solid var(--primary-brown);
+}
+
+/* Question Number */
+.question-number {
+  text-align: center;
+  color: var(--primary-brown);
+  font-size: 0.9em;
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Timer Component */
+.timer {
+  font-family: var(--font-primary);
+  font-size: 24px;
+  color: var(--primary-brown);
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: rgba(139, 69, 19, 0.1);
+  border: 2px solid var(--primary-brown);
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.timer.warning {
+  color: var(--error-red);
+  font-weight: bold;
+}
+
+/* Reaction Component */
+.reaction {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-style: italic;
+  color: var(--text-primary);
+  background: rgba(245, 222, 179, 0.8);
+  border: 2px solid var(--primary-brown);
+  border-radius: var(--border-radius-md);
+  text-align: center;
+  font-size: 1em;
+  font-family: var(--font-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.reaction.show {
+  opacity: 1;
+  animation: fadeInScale 0.5s ease-in-out;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .parchment {
+    padding: var(--spacing-lg) var(--spacing-md);
+    margin: var(--spacing-sm) 0;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  }
+  
+  .parchment-scroll {
+    padding: var(--spacing-lg) var(--spacing-md);
+    max-width: 100%;
+    margin: 0;
+  }
+  
+  .wax-seal {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+    margin: 0 auto var(--spacing-lg);
+  }
+  
+  .question-text {
+    font-size: 1em;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.4;
+  }
+  
+  .timer {
+    font-size: 20px;
+    padding: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .parchment {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+  
+  .wax-seal {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2em;
+  }
+}

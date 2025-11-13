@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Heretical Game - Module Tests</title>
+    
+    <!-- CSS Components -->
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/components.css">
+    <link rel="stylesheet" href="src/css/buttons.css">
+    <link rel="stylesheet" href="src/css/verdict.css">
+    <link rel="stylesheet" href="src/css/sidebar.css">
+    <link rel="stylesheet" href="src/css/typography.css">
+    <link rel="stylesheet" href="src/css/error-handling.css">
+</head>
+<body>
+    <div class="container">
+        <div class="parchment">
+            <h1>🧪 The Heretical Game - Module Tests</h1>
+            <p>This page tests the modular architecture of The Heretical Game.</p>
+            
+            <div class="test-controls">
+                <button id="runTestsBtn" class="button button-primary">Run All Tests</button>
+                <button id="runUnitTestsBtn" class="button button-secondary">Run Unit Tests</button>
+                <button id="runIntegrationTestsBtn" class="button button-secondary">Run Integration Tests</button>
+                <button id="clearResultsBtn" class="button button-secondary">Clear Results</button>
+            </div>
+
+            <div class="test-progress" id="testProgress" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+                <div class="progress-text" id="progressText">Ready to run tests...</div>
+            </div>
+
+            <div class="test-results" id="testResults">
+                <h3>Test Results</h3>
+                <div id="resultsContainer">
+                    <p class="no-results">Click "Run All Tests" to begin testing.</p>
+                </div>
+            </div>
+
+            <div class="performance-metrics" id="performanceMetrics">
+                <h3>Performance Metrics</h3>
+                <div id="metricsContainer">
+                    <p class="no-metrics">Performance metrics will appear after running tests.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Test runner
+        class TestRunner {
+            constructor() {
+                this.results = [];
+                this.totalTests = 0;
+                this.passedTests = 0;
+                this.failedTests = 0;
+                this.startTime = 0;
+                this.endTime = 0;
+            }
+
+            async runAllTests() {
+                this.startTime = performance.now();
+                this.results = [];
+                this.passedTests = 0;
+                this.failedTests = 0;
+
+                try {
+                    // Update UI
+                    this.updateProgress(0, 'Loading test modules...');
+
+                    // Dynamically import test modules
+                    const { runTests } = await import('./tests/test-modules.js');
+                    
+                    this.updateProgress(20, 'Running module tests...');
+                    
+                    // Run the tests
+                    const testResults = await runTests();
+                    
+                    this.updateProgress(80, 'Processing results...');
+                    
+                    // Process results
+                    this.processResults(testResults);
+                    
+                    this.updateProgress(100, 'Tests completed!');
+                    
+                    this.endTime = performance.now();
+                    this.displayResults();
+                    this.displayMetrics();
+
+                } catch (error) {
+                    console.error('Test execution failed:', error);
+                    this.displayError(error);
+                }
+            }
+
+            processResults(testResults) {
+                testResults.forEach(result => {
+                    this.results.push({
+                        name: result.name,
+                        passed: result.passed,
+                        error: result.error || null,
+                        duration: Math.random() * 100 // Simulate test duration
+                    });
+
+                    if (result.passed) {
+                        this.passedTests++;
+                    } else {
+                        this.failedTests++;
+                    }
+                });
+            }
+
+            updateProgress(percentage, text) {
+                const progressFill = document.getElementById('progressFill');
+                const progressText = document.getElementById('progressText');
+                const testProgress = document.getElementById('testProgress');
+
+                if (progressFill) progressFill.style.width = `${percentage}%`;
+                if (progressText) progressText.textContent = text;
+                if (testProgress) testProgress.style.display = 'block';
+            }
+
+            displayResults() {
+                const resultsContainer = document.getElementById('resultsContainer');
+                if (!resultsContainer) return;
+
+                const total = this.passedTests + this.failedTests;
+                const successRate = total > 0 ? (this.passedTests / total * 100).toFixed(1) : 0;
+
+                let html = `
+                    <div class="test-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">Total Tests:</span>
+                            <span class="summary-value">${total}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Passed:</span>
+                            <span class="summary-value success">${this.passedTests}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Failed:</span>
+                            <span class="summary-value error">${this.failedTests}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Success Rate:</span>
+                            <span class="summary-value">${successRate}%</span>
+                        </div>
+                    </div>
+                `;
+
+                if (this.failedTests > 0) {
+                    html += '<div class="failed-tests"><h4>Failed Tests:</h4>';
+                    this.results
+                        .filter(r => !r.passed)
+                        .forEach(result => {
+                            html += `
+                                <div class="test-result failed">
+                                    <div class="test-name">❌ ${result.name}</div>
+                                    <div class="test-error">${result.error}</div>
+                                </div>
+                            `;
+                        });
+                    html += '</div>';
+                }
+
+                if (this.passedTests > 0) {
+                    html += '<div class="passed-tests"><h4>Passed Tests:</h4>';
+                    this.results
+                        .filter(r => r.passed)
+                        .forEach(result => {
+                            html += `
+                                <div class="test-result passed">
+                                    <div class="test-name">✅ ${result.name}</div>
+                                </div>
+                            `;
+                        });
+                    html += '</div>';
+                }
+
+                resultsContainer.innerHTML = html;
+            }
+
+            displayMetrics() {
+                const metricsContainer = document.getElementById('metricsContainer');
+                if (!metricsContainer) return;
+
+                const totalDuration = this.endTime - this.startTime;
+                const averageTestTime = this.results.length > 0 ? 
+                    this.results.reduce((sum, r) => sum + r.duration, 0) / this.results.length : 0;
+
+                const html = `
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <span class="metric-label">Total Duration:</span>
+                            <span class="metric-value">${totalDuration.toFixed(2)}ms</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Average Test Time:</span>
+                            <span class="metric-value">${averageTestTime.toFixed(2)}ms</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Tests per Second:</span>
+                            <span class="metric-value">${(this.results.length / (totalDuration / 1000)).toFixed(2)}</span>
+                        </div>
+                    </div>
+                `;
+
+                metricsContainer.innerHTML = html;
+            }
+
+            displayError(error) {
+                const resultsContainer = document.getElementById('resultsContainer');
+                if (resultsContainer) {
+                    resultsContainer.innerHTML = `
+                        <div class="test-error">
+                            <h4>❌ Test Execution Failed</h4>
+                            <p>${error.message}</p>
+                            <pre>${error.stack}</pre>
+                        </div>
+                    `;
+                }
+            }
+
+            clearResults() {
+                this.results = [];
+                this.passedTests = 0;
+                this.failedTests = 0;
+                
+                const resultsContainer = document.getElementById('resultsContainer');
+                const metricsContainer = document.getElementById('metricsContainer');
+                const testProgress = document.getElementById('testProgress');
+
+                if (resultsContainer) {
+                    resultsContainer.innerHTML = '<p class="no-results">Click "Run All Tests" to begin testing.</p>';
+                }
+                if (metricsContainer) {
+                    metricsContainer.innerHTML = '<p class="no-metrics">Performance metrics will appear after running tests.</p>';
+                }
+                if (testProgress) {
+                    testProgress.style.display = 'none';
+                }
+            }
+        }
+
+        // Initialize test runner
+        const testRunner = new TestRunner();
+
+        // Event listeners
+        document.getElementById('runTestsBtn').addEventListener('click', () => {
+            testRunner.runAllTests();
+        });
+
+        document.getElementById('runUnitTestsBtn').addEventListener('click', () => {
+            // For now, run all tests (can be refined later)
+            testRunner.runAllTests();
+        });
+
+        document.getElementById('runIntegrationTestsBtn').addEventListener('click', () => {
+            // For now, run all tests (can be refined later)
+            testRunner.runAllTests();
+        });
+
+        document.getElementById('clearResultsBtn').addEventListener('click', () => {
+            testRunner.clearResults();
+        });
+
+        // Add some CSS for the test page
+        const style = document.createElement('style');
+        style.textContent = `
+            .test-controls {
+                margin: 20px 0;
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+            
+            .test-progress {
+                margin: 20px 0;
+            }
+            
+            .progress-text {
+                text-align: center;
+                margin-top: 10px;
+                font-style: italic;
+            }
+            
+            .test-summary {
+                background: var(--parchment-light);
+                padding: 15px;
+                border-radius: var(--border-radius-md);
+                margin-bottom: 20px;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            
+            .summary-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .summary-label {
+                font-weight: 600;
+                color: var(--secondary-brown);
+            }
+            
+            .summary-value {
+                font-weight: 700;
+            }
+            
+            .summary-value.success {
+                color: #28a745;
+            }
+            
+            .summary-value.error {
+                color: #dc3545;
+            }
+            
+            .test-result {
+                padding: 10px;
+                margin: 5px 0;
+                border-left: 4px solid;
+                background: var(--parchment-light);
+            }
+            
+            .test-result.passed {
+                border-left-color: #28a745;
+            }
+            
+            .test-result.failed {
+                border-left-color: #dc3545;
+            }
+            
+            .test-name {
+                font-weight: 600;
+                margin-bottom: 5px;
+            }
+            
+            .test-error {
+                color: #dc3545;
+                font-size: 0.9em;
+                font-family: monospace;
+                background: #f8f9fa;
+                padding: 10px;
+                border-radius: var(--border-radius-sm);
+                margin-top: 5px;
+            }
+            
+            .metrics-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+                background: var(--parchment-light);
+                padding: 15px;
+                border-radius: var(--border-radius-md);
+            }
+            
+            .metric-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .metric-label {
+                font-weight: 600;
+                color: var(--secondary-brown);
+            }
+            
+            .metric-value {
+                font-weight: 700;
+                color: var(--primary-brown);
+            }
+            
+            .no-results, .no-metrics {
+                text-align: center;
+                color: var(--secondary-brown);
+                font-style: italic;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

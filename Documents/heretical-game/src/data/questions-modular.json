@@ -1,0 +1,219 @@
+{
+  "metadata": {
+    "version": "2.0.0",
+    "lastUpdated": "2024-11-13",
+    "format": "modular",
+    "totalQuestions": 0,
+    "categories": ["easy", "medium", "hard", "expert"]
+  },
+  "questions": {
+    "easy": [
+      {
+        "id": "easy_001",
+        "text": "Did Jesus ever directly call Himself 'God' in the Gospels?",
+        "type": "binary",
+        "options": ["Yes", "No"],
+        "correctAnswer": "No",
+        "council": "Nicaea",
+        "heresyPoints": 1,
+        "timeLimit": 30,
+        "explanation": "While Jesus implied divinity through 'I AM' statements and accepting worship, He never explicitly said 'I am God' in the canonical Gospels.",
+        "scriptureReferences": ["John 8:58", "John 10:30", "John 14:9"],
+        "tags": ["christology", "divinity", "gospels"]
+      },
+      {
+        "id": "easy_002",
+        "text": "Paul's command for women to 'keep silent' in church (1 Corinthians 14) — was it universal or situational?",
+        "type": "binary",
+        "options": ["Universal", "Situational"],
+        "correctAnswer": "Situational",
+        "council": "General Tradition",
+        "heresyPoints": 0.5,
+        "timeLimit": 30,
+        "explanation": "Most scholars interpret this as addressing specific disorderly conduct in the Corinthian church, not a universal prohibition.",
+        "scriptureReferences": ["1 Corinthians 14:34-35", "1 Corinthians 11:5"],
+        "tags": ["paul", "women", "church-order"]
+      },
+      {
+        "id": "easy_003",
+        "text": "'Faith without works is dead' (James 2) — does this contradict Paul?",
+        "type": "binary",
+        "options": ["Yes", "No"],
+        "correctAnswer": "No",
+        "council": "Trent",
+        "heresyPoints": 1,
+        "timeLimit": 30,
+        "explanation": "James and Paul address different aspects: Paul emphasizes justification before God, James emphasizes evidence of genuine faith.",
+        "scriptureReferences": ["James 2:14-26", "Romans 3:28", "Ephesians 2:8-10"],
+        "tags": ["faith", "works", "justification"]
+      },
+      {
+        "id": "easy_004",
+        "text": "Did Jesus promise His followers an easy life of comfort?",
+        "type": "binary",
+        "options": ["Yes", "No"],
+        "correctAnswer": "No",
+        "council": "General Scripture",
+        "heresyPoints": 1,
+        "timeLimit": 30,
+        "explanation": "Jesus promised persecution and hardship for His followers, not comfort and ease.",
+        "scriptureReferences": ["John 16:33", "Matthew 10:22", "Luke 9:23"],
+        "tags": ["discipleship", "suffering", "promises"]
+      },
+      {
+        "id": "easy_005",
+        "text": "The 'Great Commission' (Matthew 28) was given to...",
+        "type": "binary",
+        "options": ["Only the Apostles", "All Believers"],
+        "correctAnswer": "All Believers",
+        "council": "General Tradition",
+        "heresyPoints": 0.5,
+        "timeLimit": 30,
+        "explanation": "While given to the apostles, the commission extends to all believers throughout history.",
+        "scriptureReferences": ["Matthew 28:19-20", "Acts 1:8"],
+        "tags": ["mission", "evangelism", "great-commission"]
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium_001",
+        "text": "Which council established the doctrine of the Trinity?",
+        "type": "multiple-choice",
+        "options": [
+          { "text": "Council of Nicaea (325)", "value": "nicaea" },
+          { "text": "Council of Constantinople (381)", "value": "constantinople" },
+          { "text": "Council of Chalcedon (451)", "value": "chalcedon" },
+          { "text": "Council of Trent (1545-1563)", "value": "trent" }
+        ],
+        "correctAnswer": "nicaea",
+        "council": "Nicaea",
+        "heresyPoints": 2,
+        "timeLimit": 45,
+        "explanation": "The Council of Nicaea (325) established the consubstantiality of the Son with the Father, laying groundwork for Trinitarian doctrine.",
+        "scriptureReferences": ["Matthew 28:19", "John 1:1", "2 Corinthians 13:14"],
+        "tags": ["trinity", "nicaea", "doctrine"]
+      },
+      {
+        "id": "medium_002",
+        "text": "What is the proper relationship between Scripture and Tradition?",
+        "type": "multiple-choice",
+        "options": [
+          { "text": "Scripture alone is sufficient", "value": "sola-scriptura" },
+          { "text": "Tradition alone is sufficient", "value": "sola-traditio" },
+          { "text": "Scripture and Tradition work together", "value": "scripture-tradition" },
+          { "text": "They are completely separate", "value": "separate" }
+        ],
+        "correctAnswer": "scripture-tradition",
+        "council": "Trent",
+        "heresyPoints": 2,
+        "timeLimit": 45,
+        "explanation": "The Council of Trent affirmed that Scripture and Tradition together form the deposit of faith, not in opposition but in harmony.",
+        "scriptureReferences": ["2 Thessalonians 2:15", "1 Corinthians 11:2"],
+        "tags": ["scripture", "tradition", "authority"]
+      },
+      {
+        "id": "medium_003",
+        "text": "How many natures does Christ have according to the Chalcedonian Definition?",
+        "type": "binary",
+        "options": ["One nature", "Two natures"],
+        "correctAnswer": "Two natures",
+        "council": "Chalcedon",
+        "heresyPoints": 2,
+        "timeLimit": 45,
+        "explanation": "The Council of Chalcedon (451) defined that Christ has two natures, divine and human, united in one person.",
+        "scriptureReferences": ["John 1:14", "Colossians 2:9", "Hebrews 4:15"],
+        "tags": ["christology", "natures", "chalcedon"]
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard_001",
+        "text": "What was the primary issue addressed by the Council of Ephesus?",
+        "type": "multiple-choice",
+        "options": [
+          { "text": "The divinity of Christ", "value": "divinity" },
+          { "text": "The humanity of Christ", "value": "humanity" },
+          { "text": "Mary as Theotokos (God-bearer)", "value": "theotokos" },
+          { "text": "The authority of the Pope", "value": "papal-authority" }
+        ],
+        "correctAnswer": "theotokos",
+        "council": "Ephesus",
+        "heresyPoints": 3,
+        "timeLimit": 60,
+        "explanation": "The Council of Ephesus (431) affirmed Mary as Theotokos against Nestorius, who preferred Christotokos.",
+        "scriptureReferences": ["Luke 1:43", "John 1:14"],
+        "tags": ["mary", "ephesus", "nestorianism"]
+      },
+      {
+        "id": "hard_002",
+        "text": "Which heresy taught that Jesus was purely divine and only appeared to be human?",
+        "type": "multiple-choice",
+        "options": [
+          { "text": "Arianism", "value": "arianism" },
+          { "text": "Docetism", "value": "docetism" },
+          { "text": "Nestorianism", "value": "nestorianism" },
+          { "text": "Monophysitism", "value": "monophysitism" }
+        ],
+        "correctAnswer": "docetism",
+        "council": "General Tradition",
+        "heresyPoints": 3,
+        "timeLimit": 60,
+        "explanation": "Docetism taught that Christ only appeared to have a physical body, denying His true humanity.",
+        "scriptureReferences": ["1 John 4:2-3", "2 John 7"],
+        "tags": ["heresy", "docetism", "christology"]
+      }
+    ],
+    "expert": [
+      {
+        "id": "expert_001",
+        "text": "What was the theological significance of the filioque controversy?",
+        "type": "multiple-choice",
+        "options": [
+          { "text": "The Holy Spirit proceeds from the Father only", "value": "father-only" },
+          { "text": "The Holy Spirit proceeds from the Father and the Son", "value": "father-son" },
+          { "text": "The Holy Spirit is subordinate to the Son", "value": "subordinate" },
+          { "text": "The Holy Spirit is not divine", "value": "not-divine" }
+        ],
+        "correctAnswer": "father-son",
+        "council": "Constantinople",
+        "heresyPoints": 4,
+        "timeLimit": 90,
+        "explanation": "The filioque ('and the Son') controversy centered on whether the Holy Spirit proceeds from the Father alone or from both Father and Son.",
+        "scriptureReferences": ["John 15:26", "John 16:7", "Romans 8:9"],
+        "tags": ["filioque", "holy-spirit", "trinity", "east-west"]
+      }
+    ]
+  },
+  "councilMappings": {
+    "Nicaea": {
+      "name": "Council of Nicaea",
+      "year": 325,
+      "description": "First ecumenical council, established the divinity of Christ",
+      "icon": "🏛️"
+    },
+    "Constantinople": {
+      "name": "Council of Constantinople", 
+      "year": 381,
+      "description": "Refined and expanded the Nicene Creed",
+      "icon": "🏛️"
+    },
+    "Ephesus": {
+      "name": "Council of Ephesus",
+      "year": 431,
+      "description": "Defined Mary as Theotokos (God-bearer)",
+      "icon": "🏛️"
+    },
+    "Chalcedon": {
+      "name": "Council of Chalcedon",
+      "year": 451,
+      "description": "Defined Christ's two natures (divine and human)",
+      "icon": "🏛️"
+    },
+    "Trent": {
+      "name": "Council of Trent",
+      "year": "1545-1563",
+      "description": "Catholic Counter-Reformation council",
+      "icon": "⚔️"
+    }
+  }
+}
